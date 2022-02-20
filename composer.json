@@ -1,0 +1,31 @@
+{
+    "name": "ghostscypher/laravel-mpesa",
+    "version": "1.0.0",
+    "description": "This is a wrapper around Mpesa APIs for Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ghostscypher\\Mpesa\\": "src/"
+        }
+    },
+    "authors": [{
+        "name": "Ghostscypher",
+        "email": "bngetich69@gmail.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4|^8.0",
+        "hackdelta/mpesa": "^1.0.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ghostscypher\\Mpesa\\MpesaServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0"
+    }
+}
