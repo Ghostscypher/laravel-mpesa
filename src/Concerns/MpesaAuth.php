@@ -42,6 +42,10 @@ trait MpesaAuth
         if($token && ! $force) {
             $this->token = $token->token;
 
+            $this->http_client->replaceHeaders([
+                'Authorization' => 'Bearer ' . $this->token,
+            ]);
+
             return $token->token;
         }
 
@@ -75,6 +79,11 @@ trait MpesaAuth
 
         // Set the token
         $this->token = $token->token;
+
+        // Update the headers
+        $this->http_client->replaceHeaders([
+            'Authorization' => 'Bearer ' . $this->token,
+        ]);
 
         return $this->token;
     }

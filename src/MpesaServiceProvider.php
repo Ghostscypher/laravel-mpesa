@@ -38,8 +38,8 @@ class MpesaServiceProvider extends PackageServiceProvider
     {
         // Register events
         if(config('mpesa.features.enable_logging')) {
-            Event::listen(RequestSending::class, \Ghostscypher\Mpesa\Listeners\LogRequestSending::class);
-            Event::listen(ResponseReceived::class, \Ghostscypher\Mpesa\Listeners\LogResponseReceived::class);
+            Event::listen(RequestSending::class, config('mpesa.listeners.log_request'));
+            Event::listen(ResponseReceived::class, config('mpesa.listeners.log_response'));
         }
     }
 }

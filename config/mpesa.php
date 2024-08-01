@@ -267,17 +267,26 @@ return [
     |
     */
     'features' => [
-        'process_stk_push' => env('MPESA_FEATURE_PROCESS_STK_PUSH', true), // Enable this to process STK push 
-                                    // transactions by storing them in the database, 
-                                    // this also enables the package to process callbacks
+        /** Enable this to process STK push  transactions by storing them in the database.*/ 
+        'process_stk_push' => env('MPESA_FEATURE_PROCESS_STK_PUSH', true), 
+
+        /** Enable this package to process STK push callback, this will use whatever is stored in the database to process the callback.
+         * If this is disabled, the package will not process the callback and you will need to handle the callback yourself.
+        */
+        'process_stk_push_callback' => env('MPESA_FEATURE_PROCESS_STK_PUSH_CALLBACK', true),
+        
         // 'c2b' => true, // Enable C2B feature
         // 'b2c' => true, // Enable B2C feature
         // 'b2b' => true, // Enable B2B feature
         // 'reversal' => true, // Enable reversal feature
         // 'balance' => true, // Enable balance feature
         // 'status' => true, // Enable status feature,
-        'enable_logging' => env('MPESA_FEATURE_ENABLE_LOGGING', false), // Enable logging of the transactions, this will store all the requests and responses in the database, 
-                            // useful for debugging, by default this is disabled
+
+        /** 
+         * Enable logging of the transactions, this will store all the requests and responses in the database, 
+        * useful for debugging, by default this is disabled 
+        */
+        'enable_logging' => env('MPESA_FEATURE_ENABLE_LOGGING', false),
     ],
 
     /*
@@ -292,9 +301,9 @@ return [
     | Note: This will be used only if the feature for logging is enabled
     |
     */
-    'log_listeners' => [
-        \Ghostscypher\Mpesa\Listeners\LogRequestSending::class, // The listener for logging the request sending
-        \Ghostscypher\Mpesa\Listeners\LogResponseReceived::class, // The listener for logging the response received
+    'listeners' => [
+        'log_request' => \Ghostscypher\Mpesa\Listeners\LogRequestSending::class, // The listener for logging the request sending
+        'log_response' => \Ghostscypher\Mpesa\Listeners\LogResponseReceived::class, // The listener for logging the response received
     ],
 
     /*

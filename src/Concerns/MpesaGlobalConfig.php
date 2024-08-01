@@ -98,7 +98,7 @@ trait MpesaGlobalConfig
      * @param  array  $attributes
      * @return ($data is null ? \Illuminate\Contracts\Validation\Factory : \Illuminate\Contracts\Validation\Validator)
      */
-    protected static function validator(?array $data = null, array $rules = [], array $messages = [], array $attributes = [])
+    protected static function validate(?array $data = null, array $rules = [], array $messages = [], array $attributes = [])
     {
         $factory = app(Factory::class);
         $factory->extend('phone_number', function ($attribute, $value, $parameters, $validator) {

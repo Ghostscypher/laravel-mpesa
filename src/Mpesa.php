@@ -2,6 +2,7 @@
 
 namespace Ghostscypher\Mpesa;
 
+use Ghostscypher\Mpesa\Concerns\MpesaQRCode;
 use Ghostscypher\Mpesa\Concerns\MpesaStkPush;
 use Illuminate\Http\Client\Response;
 
@@ -14,6 +15,7 @@ use Illuminate\Http\Client\Response;
 class Mpesa
 {
     use MpesaStkPush;
+    use MpesaQRCode;
 
     /**
      * If for some reason you need to make a raw request to the APIs you can use this method

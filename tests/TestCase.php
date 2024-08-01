@@ -3,6 +3,7 @@
 namespace Ghostscypher\Mpesa\Tests;
 
 use Ghostscypher\Mpesa\MpesaServiceProvider;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 

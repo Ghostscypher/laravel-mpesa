@@ -20,6 +20,95 @@ trait MpesaStkPush
     }
 
     /**
+     * Logs the STK push response to the database
+     *
+     * @param \Illuminate\Http\Client\Response $response The response from the STK push request
+     * @param array $data The data sent to the STK push request
+     * @return void
+
+     */
+    protected function logStkPushResponse($response, $data)
+    {
+        if(! config('mpesa.features.process_stk_push')) {
+            return;
+        }
+
+        // Log the response to the database
+        $response_data = $response->json();
+
+        if($response->status() != 200) {
+            $response_data = [
+                'MerchantRequestID' => null,
+                'CheckoutRequestID' => uniqid('failed-stk-push-', true),
+                'ResponseCode' => -1,
+                'ResponseDescription' => 'Failed to send STK push',
+                'CustomerMessage' => 'Failed to send STK push',
+            ];
+        }
+
+        /**
+         * @var \Ghostscypher\Mpesa\Models\MpesaStkPush $stk_push_model
+         */
+        $stk_push_model = app(config('mpesa.models.stk_push'));
+
+        // Log the response
+        $stk_push_model->updateOrCreate([
+            'checkout_request_id' => $response_data['CheckoutRequestID'],
+        ], [
+            'phone_number' => $data['PhoneNumber'],
+            'amount' => $data['Amount'],
+            'account_reference' => $data['AccountReference'],
+            'original_request' => $data,
+            'merchant_request_id' => $response_data['MerchantRequestID'],
+            'response_code' => $response_data['ResponseCode'],
+            'request_response' => $response_data,
+            'status' => $response_data['ResponseCode'] == 0 ? 'pending' : 'failed',
+        ]);
+    }
+    
+    /**
+     * Logs the STK push Query response to the database, this will be used to track the status of the STK push
+     * previously logged from the STK push response
+     *
+     * @param \Illuminate\Http\Client\Response $response The response from the STK push request
+     * @param array $data The data sent to the STK push request
+     * @return void
+
+     */
+    protected function logStkPushQueryResponse($response, $data)
+    {
+        if(! config('mpesa.features.process_stk_push')) {
+            return;
+        }
+
+        // Log the response to the database
+        $response_data = $response->json();
+
+        if($response->status() != 200) {
+            $response_data = [
+                'MerchantRequestID' => null,
+                'CheckoutRequestID' => uniqid('failed-stk-push-query-', true),
+                'ResultCode' => -1,
+                'ResponseDescription' => 'Failed to query STK push',
+                'CustomerMessage' => 'Failed to query STK push',
+            ];
+        }
+
+        /**
+         * @var \Ghostscypher\Mpesa\Models\MpesaStkPush $stk_push_model
+         */
+        $stk_push_model = app(config('mpesa.models.stk_push'));
+
+        // Log the response
+        $stk_push_model->updateOrCreate([
+            'checkout_request_id' => $data['CheckoutRequestID'],
+        ], [
+            'result_code' => $response_data['ResultCode'],
+            'status' => $response_data['ResultCode'] == 0 ? 'success' : 'failed', // Will also be updated from callback
+        ]);
+    }
+
+    /**
      * @param string $phone_number The phone number to send the STK push to (MSISDN)
      * @param int $amount The amount to request from the user, minimum is 1
      * @param string $account_reference The reference number for the transaction, this the account number for the transaction
@@ -55,7 +144,7 @@ trait MpesaStkPush
         ];
 
         // Validate the parameters
-        $validator = self::validator($data, [
+        $validator = self::validate($data, [
             'BusinessShortCode' => 'required|numeric',
             'Password' => 'required|string',
             'Timestamp' => 'required|date_format:YmdHis',
@@ -75,8 +164,10 @@ trait MpesaStkPush
 
         // Http call
         $response = $this->http_client
-            ->replaceHeaders(['Authorization' => "Bearer {$this->token}"])
             ->post('/mpesa/stkpush/v1/processrequest', $validator->validated());
+
+        // Log this into a table
+        $this->logStkPushResponse($response, $data);
 
         // Return the response
         return $response;
@@ -107,7 +198,7 @@ trait MpesaStkPush
         ];
 
         // Validate the parameters
-        $validator = self::validator($data, [
+        $validator = self::validate($data, [
             'BusinessShortCode' => 'required|numeric',
             'Password' => 'required|string',
             'Timestamp' => 'required|date_format:YmdHis',
@@ -120,8 +211,10 @@ trait MpesaStkPush
 
         // Http call
         $response = $this->http_client
-            ->replaceHeaders(['Authorization' => "Bearer {$this->token}"])
             ->post('/mpesa/stkpushquery/v1/query', $validator->validated());
+
+        // Log this into a table
+        $this->logStkPushQueryResponse($response, $data);
 
         // Return the response
         return $response;
