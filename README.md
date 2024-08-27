@@ -7,7 +7,7 @@
 
 This package provides a simple way to integrate Mpesa APIs in your Laravel application. This package is targeted at developers who are looking to integrate Mpesa APIs in their Laravel applications. In addition to the Mpesa APIs, this package also provides a simple way to handle the Mpesa callbacks. Hence the name "Mpesa package for the lazy developer 😉".
 
-## Features
+## APIs Supported
 
 - [x] B2C
 - [x] B2B
@@ -17,6 +17,10 @@ This package provides a simple way to integrate Mpesa APIs in your Laravel appli
 - [x] Transaction Status
 - [x] Account Balance
 - [x] QR Code Generation
+
+## Compatibility
+
+This package is compatible with Laravel 7.x and above.
 
 ## Installation
 
