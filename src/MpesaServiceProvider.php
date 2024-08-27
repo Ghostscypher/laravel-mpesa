@@ -2,11 +2,11 @@
 
 namespace Ghostscypher\Mpesa;
 
+use Ghostscypher\Mpesa\Commands\InstallMpesaPackageCommand;
 use Ghostscypher\Mpesa\Commands\RegisterC2BCallbackCommand;
 use Illuminate\Http\Client\Events\RequestSending;
 use Illuminate\Http\Client\Events\ResponseReceived;
 use Illuminate\Support\Facades\Event;
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -41,36 +41,29 @@ class MpesaServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function bootingPackage()
+    public function registeringPackage()
     {
         // Controllers
         $this->publishes([static::CONTROLLERS => app()->path('Http/Controllers/LaravelMpesa')], 'controllers');
+        $this->publishes([__DIR__.'/../config/mpesa.php' => config_path('mpesa.php')], 'config');
+        $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'migrations');
     }
 
     public function configurePackage(Package $package): void
     {
-        $migrations = glob(__DIR__.'/../database/migrations/*.php.stub');
-        $migrations = array_map(function ($migration_name) {
-            return str_replace('.php.stub', '', basename($migration_name));
-        }, $migrations);
+        // $migrations = glob(__DIR__.'/../database/migrations/*.php');
+        // $migrations = array_map(function ($migration_name) {
+        //     return str_replace('.php', '', basename($migration_name));
+        // }, $migrations);
 
         $package
             ->name('mpesa')
             ->hasConfigFile('mpesa')
-            ->hasMigrations($migrations)
-            ->hasCommand(RegisterC2BCallbackCommand::class)
-            ->hasInstallCommand(function (InstallCommand $command) {
-                $command
-                    ->publishConfigFile()
-                    ->publishMigrations()
-                    ->publish('controllers')
-                    ->askToRunMigrations();
-
-                // Publish the controllers
-                $this->publishController();
-
-                //->askToStarRepoOnGitHub('Ghostscypher/laravel-mpesa'); // Will probably be removed in future versions
-            });
+            // ->hasMigrations($migrations)
+            ->hasCommands([
+                RegisterC2BCallbackCommand::class,
+                InstallMpesaPackageCommand::class,
+            ]);
     }
 
     public function packageRegistered()

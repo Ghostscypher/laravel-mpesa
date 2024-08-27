@@ -43,7 +43,7 @@ class TestCase extends BaseTestCase
     protected function loadMigrations($app)
     {
         // Get all files in the migrations directory
-        $files = glob(__DIR__.'/../database/migrations/*.php.stub');
+        $files = glob(__DIR__.'/../database/migrations/*.php');
 
         foreach ($files as $file) {
             // Read file contents

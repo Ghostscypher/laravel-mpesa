@@ -30,12 +30,8 @@ trait MpesaGlobalConfig
     // Update the HTTP client with the required headers
     protected function updateHttpClient(array $headers = [], array $options = []): PendingRequest
     {
-        // Get the original headers
-        $original_headers = $this->http_client->getOptions()['headers'] ?? [];
-
         // Merge the headers
         $headers = array_merge(
-            $original_headers,
             $headers,
             [
                 // Add the request ID and timestamp, this is for tracking requests
@@ -44,12 +40,15 @@ trait MpesaGlobalConfig
             ]
         );
 
-        // Update the headers
-        $this->http_client->withHeaders($headers);
+        // Merge data
+        $options = array_merge(
+            $options,
+            [
+                'headers' => $headers,
+            ]
+        );
 
-        // Update the options
-        $original_options = $this->http_client->getOptions();
-        $this->http_client->withOptions(array_merge($original_options, $options));
+        $this->http_client->withOptions($options);
 
         return $this->http_client;
     }

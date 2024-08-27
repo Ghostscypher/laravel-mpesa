@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     public function up()
-    {   
+    {
         // Stores mpesa callbacks in a table
         Schema::create('mpesa_callbacks', function (Blueprint $table) {
             $table->id();

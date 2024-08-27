@@ -3,12 +3,10 @@
 namespace Ghostscypher\Mpesa\Models;
 
 use Ghostscypher\Mpesa\Concerns\UsesMpesaEnv;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class MpesaToken extends Model
 {
-    use HasFactory;
     use UsesMpesaEnv;
 
     protected $table = 'mpesa_tokens';
