@@ -9,24 +9,18 @@ namespace Ghostscypher\Mpesa\Exceptions;
  */
 class MpesaValidationException extends \Exception
 {
-    /**
-     * @var array
-     */
     public array $errors;
 
     /**
      * MpesaValidationException constructor.
      *
-     * @param array $errors
-     * @param string $message
-     * @param int $code
-     * @param Throwable|null $previous
+     * @param  Throwable|null  $previous
      */
-    public function __construct(array $errors, string $message = 'Validation failed', int $code = 0, \Throwable $previous = null)
+    public function __construct(array $errors, string $message = 'Validation failed', int $code = 0, ?\Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->errors = $errors;
-        
-        $this->message = $message . " ---> " . json_encode($errors);
+
+        $this->message = $message.' ---> '.json_encode($errors);
     }
 }

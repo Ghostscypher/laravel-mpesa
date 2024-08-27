@@ -88,6 +88,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Partner Name
+    |--------------------------------------------------------------------------
+    |
+    | This is the organization Friendly name used by the vendor as known by the Merchant.
+    |
+    */
+    'partner_name' => env('MPESA_PARTNER_NAME', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | B2C Shortcode
     |--------------------------------------------------------------------------
     |
@@ -95,7 +105,18 @@ return [
     |
     */
     'b2c_shortcode' => env('MPESA_B2C_SHORTCODE', '600000'),
-    
+
+    /*
+    |--------------------------------------------------------------------------
+    | STK Push Callback URL
+    |--------------------------------------------------------------------------
+    |
+    | This is the URL that safaricom will call when the transaction is complete
+    | for a STK push transaction / lipa na mpesa online transaction
+    |
+    */
+    'stk_push_callback_url' => env('MPESA_STK_PUSH_CALLBACK_URL', ''),
+
     /*
     |--------------------------------------------------------------------------
     | C2B Validation URL
@@ -136,6 +157,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | B2C Timeout URL
+    |--------------------------------------------------------------------------
+    |
+    | This is the URL that safaricom will call when the transaction times out
+    | for a B2C transaction
+    |
+    */
+    'b2c_timeout_url' => env('MPESA_B2C_TIMEOUT_URL', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | B2B Result URL
     |--------------------------------------------------------------------------
     |
@@ -158,14 +190,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | STK Push Result URL
+    | B2B STK callback URL
     |--------------------------------------------------------------------------
     |
-    | This is the URL that safaricom will call when the transaction is complete
-    | for a STK push transaction / lipa na mpesa online transaction
+    | This is the URL that safaricom will call for the STK push callback for a B2B transaction
     |
     */
-    'stk_push_callback_url' => env('MPESA_STK_PUSH_CALLBACK_URL', ''),
+    'b2b_stk_callback_url' => env('MPESA_B2B_STK_CALLBACK_URL', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -217,7 +248,7 @@ return [
     | This is the URL that safaricom will call when you request for the balance
     |
     */
-    'balance_result_url' => env('MPESA_STATUS_RESULT_URL', ''),
+    'balance_result_url' => env('MPESA_BALANCE_STATUS_RESULT_URL', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -227,16 +258,26 @@ return [
     | This is the URL that safaricom will call when the balance request times out
     |
     */
-    'balance_timeout_url' => env('MPESA_STATUS_TIMEOUT_URL', ''),
+    'balance_timeout_url' => env('MPESA_BALANCE_STATUS_TIMEOUT_URL', ''),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Billmanager Callback URL
+    |--------------------------------------------------------------------------
+    |
+    | This is the URL that bill manager APIs use as callback, check documentation
+    | for more usage. https://developer.safaricom.co.ke/APIs/BillManager
+    |
+    */
+    'bill_manager_callback_url' => env('MPESA_BILL_MANAGER_CALLBACK_URL', ''),
 
     /*******************End of Mpesa options************************************/
-
 
     /*******************Start of customization options************************************/
     // This is the customization options for the package, it allows you to customize what
     // you want to use in the package, e.g. models, controllers, views etc.
     // It also enables you to specify features that you want to enable or disable since
-    // not all features are needed in all applications. 
+    // not all features are needed in all applications.
     // This is useful when you want to customize the package to fit your needs.
 
     /*
@@ -252,8 +293,8 @@ return [
     */
     'models' => [
         'token' => \Ghostscypher\Mpesa\Models\MpesaToken::class, // The model for the mpesa tokens, most of the time you won't need to change this
-        'stk_push' => \Ghostscypher\Mpesa\Models\MpesaStkPush::class, // The model for the STK push transactions
-        'log' => \Ghostscypher\Mpesa\Models\MpesaLog::class, // The model for the logs, HTTP requests and responses
+        'log' => \Ghostscypher\Mpesa\Models\MpesaLog::class, // The model for the logs, HTTP requests and responses,
+        'callback_log' => \Ghostscypher\Mpesa\Models\MpesaCallback::class, // The model for the mpesa callbacks,
     ],
 
     /*
@@ -267,26 +308,30 @@ return [
     |
     */
     'features' => [
-        /** Enable this to process STK push  transactions by storing them in the database.*/ 
-        'process_stk_push' => env('MPESA_FEATURE_PROCESS_STK_PUSH', true), 
+        /**
+         * Enable this to store tokens in the database, by default it's enabled
+         */
+        'store_tokens' => env('MPESA_FEATURE_STORE_TOKENS', true),
 
-        /** Enable this package to process STK push callback, this will use whatever is stored in the database to process the callback.
-         * If this is disabled, the package will not process the callback and you will need to handle the callback yourself.
-        */
-        'process_stk_push_callback' => env('MPESA_FEATURE_PROCESS_STK_PUSH_CALLBACK', true),
-        
-        // 'c2b' => true, // Enable C2B feature
-        // 'b2c' => true, // Enable B2C feature
-        // 'b2b' => true, // Enable B2B feature
-        // 'reversal' => true, // Enable reversal feature
-        // 'balance' => true, // Enable balance feature
-        // 'status' => true, // Enable status feature,
-
-        /** 
-         * Enable logging of the transactions, this will store all the requests and responses in the database, 
-        * useful for debugging, by default this is disabled 
-        */
+        /**
+         * Enable logging of the transactions, this will store all the requests and responses in the database,
+         * useful for debugging, by default this is disabled
+         */
         'enable_logging' => env('MPESA_FEATURE_ENABLE_LOGGING', false),
+
+        /**
+         * Enable logging of any callbacks, this will store all the callbacks in the database,
+         * useful for debugging, by default this is enabled.
+         *
+         * Note: This will only work if you are using the package to handle the callbacks,
+         * if you are handling the callbacks yourself, then you will need to log or handle the callbacks yourself.
+         */
+        'enable_callback_logging' => env('MPESA_FEATURE_ENABLE_CALLBACK_LOGGING', true),
+
+        /**
+         * Register the routes for the mpesa callback, this will register the routes for the mpesa callback
+         */
+        'register_routes' => env('MPESA_FEATURE_REGISTER_ROUTES', true),
     ],
 
     /*
@@ -308,16 +353,32 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Enable Mpesa IP Whitelisting
+    | Callback controller
     |--------------------------------------------------------------------------
     |
-    | This is a flag that determines whether to enable IP whitelisting for the
-    | mpesa callbacks, this is useful when you want to ensure that the callbacks
-    | are secure and only safaricom can make the callbacks to your application.
+    | This is the controller that will be used to handle the mpesa callbacks, you can
+    | change this to your own controller if you want to customize the callbacks.
     |
-    | By default, this is enabled to ensure that the callbacks are secure.
     */
-    'enable_ip_whitelisting' => env('MPESA_ENABLE_IP_WHITELISTING', true),
+    'controller' => \App\Http\Controllers\LaravelMpesa\MpesaController::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Route middlewares
+    |--------------------------------------------------------------------------
+    |
+    | This are the route middlewares that will be used by the mpesa callback routes
+    | You can add more middlewares here if you want to add more middlewares to the
+    | mpesa callback routes.
+    |
+    | Alternatively, you can disable the middlewares by commenting them out if you
+    | don't want to use them.
+    |
+    */
+    'middlewares' => [
+        // This middleware will allow only whitelisted IPs to access the mpesa callback routes
+        // \Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -356,7 +417,7 @@ return [
     | to the whitelisted IPs, this is useful when the IPs are not static and you
     | want to allow a range of IPs.
     | The fuzzy search will allow any IPs matching the first 3 octets of the IP
-    | i.e. 
+    | i.e.
     | - 196.201.214.XXX will match all IPs that start with 196.201.214
     | - 196.201.213.XXX will match all IPs that start with 196.201.213
     | - 196.201.212.XXX will match all IPs that start with 196.201.212

@@ -3,7 +3,7 @@
 use Ghostscypher\Mpesa\Facades\Mpesa;
 
 it('can be instantiated', function () {
-    $mp = new \Ghostscypher\Mpesa\Mpesa();
+    $mp = new \Ghostscypher\Mpesa\Mpesa;
     expect($mp)->toBeInstanceOf(\Ghostscypher\Mpesa\Mpesa::class);
 });
 

@@ -9,6 +9,4 @@ use Exception;
  *
  * This will be thrown when validation fails
  */
-class MpesaAuthException extends Exception
-{
-}
+class MpesaAuthException extends Exception {}

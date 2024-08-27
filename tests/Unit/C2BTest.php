@@ -1,9 +1,11 @@
 <?php
 
+// Test authorization
+
 use Ghostscypher\Mpesa\Facades\Mpesa;
 use Illuminate\Support\Facades\Http;
 
-it('can send stkpush', function () {
+it('can register validation and confirmation url', function () {
     Http::fake([
         '*' => Http::response([
             'ResponseDescription' => 'success',
@@ -13,7 +15,7 @@ it('can send stkpush', function () {
         ], 200),
     ]);
 
-    $response = Mpesa::stkPush('254708374149', 1, 'Test Account');
+    $response = Mpesa::registerUrl('https://example.com/validation', 'https://example.com/confirmation');
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response->json())->toHaveKey('ResponseCode', '0');
 });

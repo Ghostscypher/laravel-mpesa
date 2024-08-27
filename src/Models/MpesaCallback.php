@@ -6,22 +6,25 @@ use Ghostscypher\Mpesa\Concerns\UsesMpesaEnv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MpesaLog extends Model
+class MpesaCallback extends Model
 {
     use HasFactory;
     use UsesMpesaEnv;
 
-    protected $table = 'mpesa_logs';
+    protected $table = 'mpesa_callbacks';
 
     /**
      * @var array
      */
     protected $fillable = [
-        'x_reference_id',
+        'reference_id',
+        'callback_type',
         'endpoint',
+        'method',
+        'ip',
+        'user_agent',
         'request_headers',
         'request_body',
-        'request_method',
         'response_status',
         'response_headers',
         'response_body',
@@ -34,5 +37,22 @@ class MpesaLog extends Model
         'request_headers' => 'array',
         'response_headers' => 'array',
         'response_status' => 'integer',
+        'request_body' => 'json',
+        'response_body' => 'json',
     ];
+
+    public function scopeFailed($query)
+    {
+        return $query->where('response_status', '!=', 200);
+    }
+
+    public function scopeSuccess($query)
+    {
+        return $query->where('response_status', 200);
+    }
+
+    public function scopeType($query, string $type)
+    {
+        return $query->where('callback_type', $type);
+    }
 }

@@ -1,9 +1,10 @@
 <?php
 
+// Test authorization
 use Ghostscypher\Mpesa\Facades\Mpesa;
 use Illuminate\Support\Facades\Http;
 
-it('can send stkpush', function () {
+it('can send B2C request', function () {
     Http::fake([
         '*' => Http::response([
             'ResponseDescription' => 'success',
@@ -13,7 +14,7 @@ it('can send stkpush', function () {
         ], 200),
     ]);
 
-    $response = Mpesa::stkPush('254708374149', 1, 'Test Account');
+    $response = Mpesa::B2C('254708374149', 500, 'https://example.com/timeout', 'https://example.com/result');
 
     expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
 });

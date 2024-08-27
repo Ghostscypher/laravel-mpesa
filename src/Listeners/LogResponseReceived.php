@@ -11,11 +11,11 @@ class LogResponseReceived
      */
     public function handle(ResponseReceived $event): void
     {
-        if(config('mpesa.features.enable_logging')) {
+        if (config('mpesa.features.enable_logging')) {
             $request = $event->request;
             $response = $event->response;
-            
-            if($request->hasHeader('X-Ghostscypher-Laravel-Mpesa-Request-ID')) {
+
+            if ($request->hasHeader('X-Ghostscypher-Laravel-Mpesa-Request-ID')) {
                 app(config('mpesa.models.log'))->updateOrCreate([
                     'x_reference_id' => $request->header('X-Ghostscypher-Laravel-Mpesa-Request-ID')[0],
                 ], [

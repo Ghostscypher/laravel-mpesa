@@ -6627,16 +6627,16 @@
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v9.2.2",
+            "version": "v9.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "e0283b4fadbfa0104ea9ad772a390a5bfec602f0"
+                "reference": "405568eb663c4a3d5fc5c94ca7430c6643b9c7ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/e0283b4fadbfa0104ea9ad772a390a5bfec602f0",
-                "reference": "e0283b4fadbfa0104ea9ad772a390a5bfec602f0",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/405568eb663c4a3d5fc5c94ca7430c6643b9c7ff",
+                "reference": "405568eb663c4a3d5fc5c94ca7430c6643b9c7ff",
                 "shasum": ""
             },
             "require": {
@@ -6648,12 +6648,12 @@
                 "brianium/paratest": "<7.3.0 || >=8.0.0",
                 "laravel/framework": "<11.11.0 || >=12.0.0",
                 "nunomaduro/collision": "<8.0.0 || >=9.0.0",
-                "phpunit/phpunit": "<10.5.0 || 11.0.0 || >=11.3.0"
+                "phpunit/phpunit": "<10.5.0 || 11.0.0 || >=11.4.0"
             },
             "require-dev": {
                 "fakerphp/faker": "^1.23",
                 "laravel/framework": "^11.11",
-                "laravel/pint": "^1.6",
+                "laravel/pint": "^1.17",
                 "mockery/mockery": "^1.6",
                 "phpstan/phpstan": "^1.11",
                 "phpunit/phpunit": "^10.5 || ^11.0.1",
@@ -6666,7 +6666,7 @@
                 "brianium/paratest": "Allow using parallel tresting (^7.3).",
                 "ext-pcntl": "Required to use all features of the console signal trapping.",
                 "fakerphp/faker": "Allow using Faker for testing (^1.23).",
-                "laravel/framework": "Required for testing (^11.1).",
+                "laravel/framework": "Required for testing (^11.11).",
                 "mockery/mockery": "Allow using Mockery for testing (^1.6).",
                 "nunomaduro/collision": "Allow using Laravel style tests output and parallel testing (^8.0).",
                 "orchestra/testbench-dusk": "Allow using Laravel Dusk for testing (^9.0).",
@@ -6712,7 +6712,7 @@
                 "issues": "https://github.com/orchestral/testbench/issues",
                 "source": "https://github.com/orchestral/testbench-core"
             },
-            "time": "2024-07-19T10:35:39+00:00"
+            "time": "2024-08-02T10:12:21+00:00"
         },
         {
             "name": "orchestra/workbench",
@@ -6782,21 +6782,21 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v2.34.9",
+            "version": "v2.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "ef120125e036bf84c9e46a9e62219702f5b92e16"
+                "reference": "d0ff2c8ec294b7aa7fcb0f3ddc4fdec864234646"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/ef120125e036bf84c9e46a9e62219702f5b92e16",
-                "reference": "ef120125e036bf84c9e46a9e62219702f5b92e16",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/d0ff2c8ec294b7aa7fcb0f3ddc4fdec864234646",
+                "reference": "d0ff2c8ec294b7aa7fcb0f3ddc4fdec864234646",
                 "shasum": ""
             },
             "require": {
                 "brianium/paratest": "^7.3.1",
-                "nunomaduro/collision": "^7.10.0|^8.1.1",
+                "nunomaduro/collision": "^7.10.0|^8.3.0",
                 "nunomaduro/termwind": "^1.15.1|^2.0.1",
                 "pestphp/pest-plugin": "^2.1.1",
                 "pestphp/pest-plugin-arch": "^2.7.0",
@@ -6810,8 +6810,8 @@
             },
             "require-dev": {
                 "pestphp/pest-dev-tools": "^2.16.0",
-                "pestphp/pest-plugin-type-coverage": "^2.8.4",
-                "symfony/process": "^6.4.0|^7.1.1"
+                "pestphp/pest-plugin-type-coverage": "^2.8.5",
+                "symfony/process": "^6.4.0|^7.1.3"
             },
             "bin": [
                 "bin/pest"
@@ -6874,7 +6874,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v2.34.9"
+                "source": "https://github.com/pestphp/pest/tree/v2.35.0"
             },
             "funding": [
                 {
@@ -6886,7 +6886,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-11T08:36:26+00:00"
+            "time": "2024-08-02T10:57:29+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -7573,16 +7573,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.8",
+            "version": "1.11.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec"
+                "reference": "e370bcddadaede0c1716338b262346f40d296f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
-                "reference": "6adbd118e6c0515dd2f36b06cde1d6da40f1b8ec",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e370bcddadaede0c1716338b262346f40d296f82",
+                "reference": "e370bcddadaede0c1716338b262346f40d296f82",
                 "shasum": ""
             },
             "require": {
@@ -7627,7 +7627,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-24T07:01:22+00:00"
+            "time": "2024-08-01T16:25:18+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -9932,5 +9932,5 @@
         "ext-openssl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
