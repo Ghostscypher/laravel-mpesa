@@ -1,0 +1,565 @@
+{
+	"info": {
+		"_postman_id": "9cbcc9d8-8627-4998-a619-58c24dbb8d84",
+		"name": "Mpesa Callbacks",
+		"description": "Collection of APIs to test mpesa callback routes, the routes here are for Laravel Mpesa package, but can be changed to suit your needs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6607119"
+	},
+	"item": [
+		{
+			"name": "STK",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Body\": {\r\n        \"stkCallback\": {\r\n            \"MerchantRequestID\": \"29115-34620561-1\",\r\n            \"CheckoutRequestID\": \"ws_CO_04082024120745239743456815\",\r\n            \"ResultCode\": 0,\r\n            \"ResultDesc\": \"The service request is processed successfully.\",\r\n            \"CallbackMetadata\": {\r\n                \"Item\": [\r\n                    {\r\n                        \"Name\": \"Amount\",\r\n                        \"Value\": 1\r\n                    },\r\n                    {\r\n                        \"Name\": \"MpesaReceiptNumber\",\r\n                        \"Value\": \"NLJ7RT61SV\"\r\n                    },\r\n                    {\r\n                        \"Name\": \"TransactionDate\",\r\n                        \"Value\": 20191219102115\r\n                    },\r\n                    {\r\n                        \"Name\": \"PhoneNumber\",\r\n                        \"Value\": 254708374149\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/stk/push/callback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"stk",
+						"push",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "STK Failed",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Body\": {\r\n        \"stkCallback\": {\r\n            \"MerchantRequestID\": \"29115-34620561-1\",\r\n            \"CheckoutRequestID\": \"ws_CO_191220191020363925\",\r\n            \"ResultCode\": 1032,\r\n            \"ResultDesc\": \"Request canceled by user.\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/stk/push/callback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"stk",
+						"push",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B2B STK",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resultCode\": \"0\",\r\n    \"resultDesc\": \"The service request is processed successfully.\",\r\n    \"amount\": \"71.0\",\r\n    \"requestId\": \"404e1aec-19e0-4ce3-973d-bd92e94c8021\",\r\n    \"resultType\": \"0\",\r\n    \"conversationID\": \"AG_20230426_2010434680d9f5a73766\",\r\n    \"transactionId\": \"RDQ01NFT1Q\",\r\n    \"status\": \"SUCCESS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/b2b/stk/callback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"b2b",
+						"stk",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B2B STK Failed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resultCode\": \"4001\",\r\n    \"resultDesc\": \"User cancelled transaction\",\r\n    \"requestId\": \"c2a9ba32-9e11-4b90-892c-7bc54944609a\",\r\n    \"amount\": \"71.0\",\r\n    \"paymentReference\": \"MAndbubry3hi\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/b2b/stk/callback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"b2b",
+						"stk",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "C2B Validation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"TransactionType\": \"Pay Bill\",\r\n    \"TransID\": \"RKTQDM7W6S\",\r\n    \"TransTime\": \"20191122063845\",\r\n    \"TransAmount\": \"10\",\r\n    \"BusinessShortCode\": \"600638\",\r\n    \"BillRefNumber\": \"invoice008\",\r\n    \"InvoiceNumber\": \"\",\r\n    \"OrgAccountBalance\": \"\",\r\n    \"ThirdPartyTransID\": \"\",\r\n    \"MSISDN\": \"25470****149\",\r\n    \"FirstName\": \"John\",\r\n    \"MiddleName\": \"\",\r\n    \"LastName\": \"Doe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/c2b/validation",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"c2b",
+						"validation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "C2B Confirmation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"TransactionType\": \"Pay Bill\",\r\n    \"TransID\": \"RKTQDM7W6S\",\r\n    \"TransTime\": \"20191122063845\",\r\n    \"TransAmount\": \"10\",\r\n    \"BusinessShortCode\": \"600638\",\r\n    \"BillRefNumber\": \"invoice008\",\r\n    \"InvoiceNumber\": \"\",\r\n    \"OrgAccountBalance\": \"\",\r\n    \"ThirdPartyTransID\": \"\",\r\n    \"MSISDN\": \"25470****149\",\r\n    \"FirstName\": \"John\",\r\n    \"MiddleName\": \"\",\r\n    \"LastName\": \"Doe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/c2b/confirmation",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"c2b",
+						"confirmation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B2C",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": 0,\r\n        \"ResultCode\": 0,\r\n        \"ResultDesc\": \"The service request is processed successfully.\",\r\n        \"OriginatorConversationID\": \"10571-7910404-1\",\r\n        \"ConversationID\": \"AG_20191219_00004e48cf7e3533f581\",\r\n        \"TransactionID\": \"NLJ41HAY6Q\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": [\r\n                {\r\n                    \"Key\": \"TransactionAmount\",\r\n                    \"Value\": 10\r\n                },\r\n                {\r\n                    \"Key\": \"TransactionReceipt\",\r\n                    \"Value\": \"NLJ41HAY6Q\"\r\n                },\r\n                {\r\n                    \"Key\": \"B2CRecipientIsRegisteredCustomer\",\r\n                    \"Value\": \"Y\"\r\n                },\r\n                {\r\n                    \"Key\": \"B2CChargesPaidAccountAvailableFunds\",\r\n                    \"Value\": -4510.00\r\n                },\r\n                {\r\n                    \"Key\": \"ReceiverPartyPublicName\",\r\n                    \"Value\": \"254708374149 - John Doe\"\r\n                },\r\n                {\r\n                    \"Key\": \"TransactionCompletedDateTime\",\r\n                    \"Value\": \"19.12.2019 11:45:50\"\r\n                },\r\n                {\r\n                    \"Key\": \"B2CUtilityAccountAvailableFunds\",\r\n                    \"Value\": 10116.00\r\n                },\r\n                {\r\n                    \"Key\": \"B2CWorkingAccountAvailableFunds\",\r\n                    \"Value\": 900000.00\r\n                }\r\n            ]\r\n        },\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": {\r\n                \"Key\": \"QueueTimeoutURL\",\r\n                \"Value\": \"https:\\/\\/internalsandbox.safaricom.co.ke\\/mpesa\\/b2cresults\\/v1\\/submit\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/b2c/result",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"b2c",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B2C Failed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": 0,\r\n        \"ResultCode\": 2001,\r\n        \"ResultDesc\": \"The initiator information is invalid.\",\r\n        \"OriginatorConversationID\": \"29112-34801843-1\",\r\n        \"ConversationID\": \"AG_20191219_00006c6fddb15123addf\",\r\n        \"TransactionID\": \"NLJ0000000\",\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": {\r\n                \"Key\": \"QueueTimeoutURL\",\r\n                \"Value\": \"https:\\/\\/internalsandbox.safaricom.co.ke\\/mpesa\\/b2cresults\\/v1\\/submit\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/b2c/timeout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"b2c",
+						"timeout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B2B",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": \"0\",\r\n        \"ResultCode\": \"0\",\r\n        \"ResultDesc\": \"The service request is processed successfully\",\r\n        \"OriginatorConversationID\": \"626f6ddf-ab37-4650-b882-b1de92ec9aa4\",\r\n        \"ConversationID\": \"12345677dfdf89099B3\",\r\n        \"TransactionID\": \"QKA81LK5CY\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": [\r\n                {\r\n                    \"Key\": \"DebitAccountBalance\",\r\n                    \"Value\": \"{Amount={CurrencyCode=KES, MinimumAmount=618683, BasicAmount=6186.83}}\"\r\n                },\r\n                {\r\n                    \"Key\": \"Amount\",\r\n                    \"Value\": \"190.00\"\r\n                },\r\n                {\r\n                    \"Key\": \"DebitPartyAffectedAccountBalance\",\r\n                    \"Value\": \"Working Account|KES|346568.83|6186.83|340382.00|0.00\"\r\n                },\r\n                {\r\n                    \"Key\": \"TransCompletedTime\",\r\n                    \"Value\": \"20221110110717\"\r\n                },\r\n                {\r\n                    \"Key\": \"DebitPartyCharges\",\r\n                    \"Value\": \"\"\r\n                },\r\n                {\r\n                    \"Key\": \"ReceiverPartyPublicName\",\r\n                    \"Value\": \"000000– Biller Company\"\r\n                },\r\n                {\r\n                    \"Key\": \"Currency\",\r\n                    \"Value\": \"KES\"\r\n                },\r\n                {\r\n                    \"Key\": \"InitiatorAccountCurrentBalance\",\r\n                    \"Value\": \"{Amount={CurrencyCode=KES, MinimumAmount=618683, BasicAmount=6186.83}}\"\r\n                }\r\n            ]\r\n        },\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": [\r\n                {\r\n                    \"Key\": \"BillReferenceNumber\",\r\n                    \"Value\": \"19008\"\r\n                },\r\n                {\r\n                    \"Key\": \"QueueTimeoutURL\",\r\n                    \"Value\": \"http://172.31.234.68:8888/Listener.php\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/b2b/result",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"b2b",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "B2B Timeout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": 0,\r\n        \"ResultCode\": 2001,\r\n        \"ResultDesc\": \"The initiator information is invalid.\",\r\n        \"OriginatorConversationID\": \"12337-23509183-5\",\r\n        \"ConversationID\": \"AG_20200120_0000657265d5fa9ae5c0\",\r\n        \"TransactionID\": \"OAK0000000\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": {\r\n                \"Key\": \"BOCompletedTime\",\r\n                \"Value\": 20200120164825\r\n            }\r\n        },\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": {\r\n                \"Key\": \"QueueTimeoutURL\",\r\n                \"Value\": \"https://internalapi.safaricom.co.ke/mpesa/abresults/v1/submit\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/b2b/timeout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"b2b",
+						"timeout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ConversationID\": \"AG_20180223_0000493344ae97d86f75\",\r\n        \"OriginatorConversationID\": \"3213-416199-2\",\r\n        \"ResultCode\": 0,\r\n        \"ResultDesc\": \"The service request is processed successfully.\",\r\n        \"ResultType\": 0,\r\n        \"TransactionID\": \"MBN0000000\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": [\r\n                {\r\n                    \"Key\": \"DebitPartyName\",\r\n                    \"Value\": \"600310 - Safaricom333\"\r\n                },\r\n                {\r\n                    \"Key\": \"DebitPartyName\",\r\n                    \"Value\": \"254708374149 - John Doe\"\r\n                },\r\n                {\r\n                    \"Key\": \"OriginatorConversationID\",\r\n                    \"Value\": \"3211-416020-3\"\r\n                },\r\n                {\r\n                    \"Key\": \"InitiatedTime\",\r\n                    \"Value\": \"20180223054112\"\r\n                },\r\n                {\r\n                    \"Key\": \"DebitAccountType\",\r\n                    \"Value\": \"Utility Account\"\r\n                },\r\n                {\r\n                    \"Key\": \"DebitPartyCharges\",\r\n                    \"Value\": \"Fee For B2C Payment|KES|22.40\"\r\n                },\r\n                {\r\n                    \"Key\": \"TransactionReason\"\r\n                },\r\n                {\r\n                    \"Key\": \"ReasonType\",\r\n                    \"Value\": \"Business Payment to Customer via API\"\r\n                },\r\n                {\r\n                    \"Key\": \"TransactionStatus\",\r\n                    \"Value\": \"Completed\"\r\n                },\r\n                {\r\n                    \"Key\": \"FinalisedTime\",\r\n                    \"Value\": \"20180223054112\"\r\n                },\r\n                {\r\n                    \"Key\": \"Amount\",\r\n                    \"Value\": \"300\"\r\n                },\r\n                {\r\n                    \"Key\": \"ConversationID\",\r\n                    \"Value\": \"AG_20180223_000041b09c22e613d6c9\"\r\n                },\r\n                {\r\n                    \"Key\": \"ReceiptNo\",\r\n                    \"Value\": \"MBN31H462N\"\r\n                }\r\n            ]\r\n        },\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": {\r\n                \"Key\": \"Occasion\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/status/result",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"status",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Status Timeout Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": 0,\r\n        \"ResultCode\": 2001,\r\n        \"ResultDesc\": \"The initiator information is invalid.\",\r\n        \"OriginatorConversationID\": \"12337-23509183-5\",\r\n        \"ConversationID\": \"AG_20200120_0000657265d5fa9ae5c0\",\r\n        \"TransactionID\": \"OAK0000000\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": {\r\n                \"Key\": \"BOCompletedTime\",\r\n                \"Value\": 20200120164825\r\n            }\r\n        },\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": {\r\n                \"Key\": \"QueueTimeoutURL\",\r\n                \"Value\": \"https://internalapi.safaricom.co.ke/mpesa/abresults/v1/submit\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/status/timeout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"status",
+						"timeout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account Balance",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": \"0\",\r\n        \"ResultCode\": \"0\",\r\n        \"ResultDesc\": \"The service request is processed successfully\",\r\n        \"OriginatorConversationID\": \"16917-22577599-3\",\r\n        \"ConversationID\": \"AG_20200206_00005e091a8ec6b9eac5\",\r\n        \"TransactionID\": \"OA90000000\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": [\r\n                {\r\n                    \"Key\": \"AccountBalance\",\r\n                    \"Value\": \"Working Account|KES|700000.00|700000.00|0.00|0.00&Float Account|KES|0.00|0.00|0.00|0.00&Utility Account|KES|228037.00|228037.00|0.00|0.00&Charges Paid Account|KES|-1540.00|-1540.00|0.00|0.00&Organization Settlement Account|KES|0.00|0.00|0.00|0.00\"\r\n                },\r\n                {\r\n                    \"Key\": \"BOCompletedTime\",\r\n                    \"Value\": \"20200109125710\"\r\n                }\r\n            ],\r\n            \"ReferenceData\": {\r\n                \"ReferenceItem\": {\r\n                    \"Key\": \"QueueTimeoutURL\",\r\n                    \"Value\": \"https://internalsandbox.safaricom.co.ke/mpesa/abresults/v1/submit\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/balance/result",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"balance",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account Balance Timeout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": 0,\r\n        \"ResultCode\": 2001,\r\n        \"ResultDesc\": \"The initiator information is invalid.\",\r\n        \"OriginatorConversationID\": \"12337-23509183-5\",\r\n        \"ConversationID\": \"AG_20200120_0000657265d5fa9ae5c0\",\r\n        \"TransactionID\": \"OAK0000000\",\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": {\r\n                \"Key\": \"QueueTimeoutURL\",\r\n                \"Value\": \"https://internalapi.safaricom.co.ke/mpesa/abresults/v1/submit\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/balance/timeout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"balance",
+						"timeout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reversal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": \"0\",\r\n        \"ResultCode\": \"21\",\r\n        \"ResultDesc\": \"The service request is processed successfully\",\r\n        \"OriginatorConversationID\": \"8521-4298025-1\",\r\n        \"ConversationID\": \"AG_20181005_00004d7ee675c0c7ee0b\",\r\n        \"TransactionID\": \"MJ561H6X5O\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": [\r\n                {\r\n                    \"Key\": \"DebitAccountBalance\",\r\n                    \"Value\": \"Utility Account|KES|51661.00|51661.00|0.00|0.00\"\r\n                },\r\n                {\r\n                    \"Key\": \"Amount\",\r\n                    \"Value\": \"100\"\r\n                },\r\n                {\r\n                    \"Key\": \"TransCompletedTime\",\r\n                    \"Value\": \"20181005153225\"\r\n                },\r\n                {\r\n                    \"Key\": \"OriginalTransactionID\",\r\n                    \"Value\": \"MJ551H6X5D\"\r\n                },\r\n                {\r\n                    \"Key\": \"Charge\",\r\n                    \"Value\": \"0\"\r\n                },\r\n                {\r\n                    \"Key\": \"CreditPartyPublicName\",\r\n                    \"Value\": \"254708374149 - John Doe\"\r\n                },\r\n                {\r\n                    \"Key\": \"DebitPartyPublicName\",\r\n                    \"Value\": \"601315 - Safaricom1338\"\r\n                }\r\n            ]\r\n        },\r\n        \"ReferenceData\": {\r\n            \"ReferenceItem\": {\r\n                \"Key\": \"QueueTimeoutURL\",\r\n                \"Value\": \"https://internalsandbox.safaricom.co.ke/mpesa/reversalresults/v1/submit\"\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/reversal/result",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"reversal",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reversal Timeout",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Result\": {\r\n        \"ResultType\": \"0\",\r\n        \"ResultCode\": \"0\",\r\n        \"ResultDesc\": \"The service request is processed successfully\",\r\n        \"OriginatorConversationID\": \"16917-22577599-3\",\r\n        \"ConversationID\": \"AG_20200206_00005e091a8ec6b9eac5\",\r\n        \"TransactionID\": \"OA90000000\",\r\n        \"ResultParameters\": {\r\n            \"ResultParameter\": [\r\n                {\r\n                    \"Key\": \"AccountBalance\",\r\n                    \"Value\": \"Working Account|KES|700000.00|700000.00|0.00|0.00&Float\\nAccount|KES|0.00|0.00|0.00|0.00&Utility\\nAccount|KES|228037.00|228037.00|0.00|0.00&Charges Paid\\nAccount|KES|-1540.00|-1540.00|0.00|0.00&Organization Settlement\\nAccount|KES|0.00|0.00|0.00|0.00\"\r\n                },\r\n                {\r\n                    \"Key\": \"BOCompletedTime\",\r\n                    \"Value\": \"20200109125710\"\r\n                }\r\n            ],\r\n            \"ReferenceData\": {\r\n                \"ReferenceItem\": {\r\n                    \"Key\": \"QueueTimeoutURL\",\r\n                    \"Value\": \"https://internalsandbox.safaricom.co.ke/mpesa/abresults/v1/submit\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/balance/result",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"balance",
+						"result"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bill Manager Callback",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentDate\": \"2021-10-01\",\r\n    \"paidAmount\": \"800\",\r\n    \"accountReference\": \"Balboa95\",\r\n    \"transactionId\": \"PJB53MYR1N\",\r\n    \"phoneNumber\": \"0710XXXXXX\",\r\n    \"fullName\": \"John Doe\",\r\n    \"invoiceName\": \"School Fees\",\r\n    \"externalReference\": \"955\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/bill/manager/callback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"bill",
+						"manager",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
