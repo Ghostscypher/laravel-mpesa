@@ -1,9 +1,8 @@
 # Laravel Mpesa
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ghostscypher/mpesa.svg?style=flat-square)](https://packagist.org/packages/ghostscypher/mpesa)
-[![Build Status](https://img.shields.io/travis/ghostscypher/mpesa/master.svg?style=flat-square)](https://travis-ci.org/ghostscypher/mpesa)
-[![Quality Score](https://img.shields.io/scrutinizer/g/ghostscypher/mpesa.svg?style=flat-square)](https://scrutinizer-ci.com/g/ghostscypher/mpesa)
-[![Total Downloads](https://img.shields.io/packagist/dt/ghostscypher/mpesa.svg?style=flat-square)](https://packagist.org/packages/ghostscypher/mpesa)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/ghostscypher/laravel-mpesa.svg?style=flat-square)](https://packagist.org/packages/ghostscypher/laravel-mpesa)
+[![Build Status](https://github.com/ghostscypher/laravel-mpesa/actions/workflows/run-tests.yml/badge.svg?)](https://github.com/ghostscypher/laravel-mpesa)
+[![Total Downloads](https://img.shields.io/packagist/dt/ghostscypher/laravel-mpesa.svg?style=flat-square)](https://packagist.org/packages/ghostscypher/laravel-mpesa)
 
 This package provides a simple way to integrate Mpesa APIs in your Laravel application. This package is targeted at developers who are looking to integrate Mpesa APIs in their Laravel applications. In addition to the Mpesa APIs, this package also provides a simple way to handle the Mpesa callbacks. Hence the name "Mpesa package for the lazy developer 😉".
 
@@ -29,6 +28,14 @@ You can install the package via composer:
 ```bash
 composer require ghostscypher/mpesa
 ```
+
+After installing run
+
+```bash
+php artisan mpesa:install
+```
+
+In order to publish assets
 
 ## Documentation
 
