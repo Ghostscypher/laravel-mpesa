@@ -1,7 +1,11 @@
 name: run-tests
 on:
-  - push
-  - pull_request
+  workflow_run:
+    workflows:
+      - pint
+      - update-changelog
+    types:
+      - completed
 
 jobs:
   test:
