@@ -19,45 +19,45 @@ jobs:
         laravel: ["7.*", 8.*', "9.*", "10.*", "11.*"]
         stability: [prefer-stable]
         include:
-          - laravel: 11.*
-            testbench: 9.*
-          - laravel: 10.*
-            testbench: 8.*
-          - laravel: 9.*
-            testbench: 7.*
-          - laravel: 8.*
+          - laravel: "11.*"
+            testbench: "9.*"
+          - laravel: "10.*"
+            testbench: "8.*"
+          - laravel: "9.*"
+            testbench: "7.*"
+          - laravel: "8.*"
             testbench: ^6.23
-            carbon: ^2.63
-          - laravel: 7.*
-            testbench: 5.*
-            carbon: ^2.63
+            carbon: "^2.63"
+          - laravel: "7.*"
+            testbench: "5.*"
+            carbon: "^2.63"
         exclude:
           - php: "8.1"
-            laravel: 7.*
+            laravel: "7.*"
           - php: "8.2"
-            laravel: 7.*
+            laravel: "7.*"
           - php: "8.3"
-            laravel: 7.*
+            laravel: "7.*"
           - php: "8.0"
-            laravel: 7.*
+            laravel: "7.*"
           - php: "8.1"
-            laravel: 8.*
+            laravel: "8.*"
           - php: "8.2"
-            laravel: 8.*
+            laravel: "8.*"
           - php: "8.3"
-            laravel: 8.*
+            laravel: "8.*"
           - php: "7.4"
-            laravel: 9.*
+            laravel: "9.*"
           - php: "7.4"
-            laravel: 10.*
+            laravel: "10.*"
           - php: "8.0"
-            laravel: 10.*
+            laravel: "10.*"
           - php: "7.4"
-            laravel: 11.*
+            laravel: "11.*"
           - php: "8.0"
-            laravel: 11.*
+            laravel: "11.*"
           - php: "8.1"
-            laravel: 11.*
+            laravel: "11.*"
 
     name: PHP${{ matrix.php }} - Laravel_${{ matrix.laravel }} - ${{ matrix.stability }}
 
@@ -103,7 +103,7 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-        if: matrix.laravel == '7.*' || matrix.laravel == '8.*' && matrix.php != ''
+        if: (matrix.laravel == '7.*' || matrix.laravel == '8.*') && matrix.php != ''
 
       - name: Execute tests
         run: vendor/bin/pest
