@@ -41,7 +41,7 @@ class MpesaServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function registeringPackage()
+    public function registeringPackage(): void
     {
         // Controllers
         $this->publishes([static::CONTROLLERS => app()->path('Http/Controllers/LaravelMpesa')], 'controllers');
@@ -66,7 +66,7 @@ class MpesaServiceProvider extends PackageServiceProvider
             ]);
     }
 
-    public function packageRegistered()
+    public function packageRegistered(): void
     {
         // Merge the package config file
         $this->mergeConfigFrom(__DIR__.'/../config/mpesa.php', 'mpesa');
@@ -82,7 +82,7 @@ class MpesaServiceProvider extends PackageServiceProvider
         });
     }
 
-    protected function registerRoutes()
+    protected function registerRoutes(): void
     {
         $default_routes = [
             'stk_push_callback_url' => '/lmp/stk/push/callback',
@@ -117,7 +117,7 @@ class MpesaServiceProvider extends PackageServiceProvider
     /**
      * @return void
      */
-    public function packageBooted()
+    public function packageBooted(): void
     {
         // Register events
         if (config('mpesa.features.enable_logging')) {
