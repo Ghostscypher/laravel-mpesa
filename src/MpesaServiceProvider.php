@@ -114,9 +114,6 @@ class MpesaServiceProvider extends PackageServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../routes/mpesa_callback.php');
     }
 
-    /**
-     * @return void
-     */
     public function packageBooted(): void
     {
         // Register events

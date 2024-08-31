@@ -6,11 +6,11 @@ namespace GuzzleHttp\Promise;
 if (! function_exists('\GuzzleHttp\Promise\promise_for')) {
 
     /**
-     * @inheritDoc
-     * @param mixed $response
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * {@inheritDoc}
+     *
+     * @param  mixed  $response
      */
-    function promise_for($response):\GuzzleHttp\Promise\PromiseInterface
+    function promise_for($response): \GuzzleHttp\Promise\PromiseInterface
     {
         return \GuzzleHttp\Promise\Create::promiseFor($response);
     }
