@@ -8,13 +8,13 @@
     cacheDirectory=".phpunit.result.cache"
     backupStaticProperties="false"
   >
-  <testsuites>
+    <testsuites>
     <testsuite name="Laravel Mpesa Test Suite">
-      <directory>tests</directory>
+        <directory>tests</directory>
     </testsuite>
-  </testsuites>
+    </testsuites>
 
-  <php>
+    <php>
     <env name="APP_ENV" value="testing" />
     <env name="CACHE_DRIVER" value="array"/>
     <env name="SESSION_DRIVER" value="array"/>
@@ -30,11 +30,16 @@
     <env name="API_DEBUG" value="false"/>
     <env name="MAIL_DRIVER" value="log"/>
     <ini name="memory_limit" value="512M"/>
-  </php>
+    </php>
 
-  <source>
+    <source>
     <include>
-      <directory suffix=".php">./src</directory>
+        <directory suffix=".php">./src</directory>
     </include>
-  </source>
+    </source>
+    <coverage cacheDirectory=".phpunit.cache/code-coverage">
+        <report>
+            <clover outputFile="clover.xml" />
+        </report>
+    </coverage>
 </phpunit>
