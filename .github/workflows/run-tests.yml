@@ -2,7 +2,7 @@ name: run-tests
 on:
   workflow_run:
     workflows:
-      - Check & fix styling
+      - pint
     types:
       - completed
 
