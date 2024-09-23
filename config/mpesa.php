@@ -315,9 +315,9 @@ return [
 
         /**
          * Enable logging of the transactions, this will store all the requests and responses in the database,
-         * useful for debugging, by default this is disabled
+         * useful for debugging, by default this is enabled
          */
-        'enable_logging' => env('MPESA_FEATURE_ENABLE_LOGGING', false),
+        'enable_logging' => env('MPESA_FEATURE_ENABLE_LOGGING', true),
 
         /**
          * Enable logging of any callbacks, this will store all the callbacks in the database,
