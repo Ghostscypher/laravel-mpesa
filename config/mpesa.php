@@ -315,9 +315,9 @@ return [
 
         /**
          * Enable logging of the transactions, this will store all the requests and responses in the database,
-         * useful for debugging, by default this is disabled
+         * useful for debugging, by default this is enabled
          */
-        'enable_logging' => env('MPESA_FEATURE_ENABLE_LOGGING', false),
+        'enable_logging' => env('MPESA_FEATURE_ENABLE_LOGGING', true),
 
         /**
          * Enable logging of any callbacks, this will store all the callbacks in the database,
@@ -377,7 +377,20 @@ return [
     */
     'middlewares' => [
         // This middleware will allow only whitelisted IPs to access the mpesa callback routes
-        // \Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
+        \Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Bypassed environment
+    |--------------------------------------------------------------------------
+    |
+    | This is a list of environments that are allowed to access the mpesa callback
+    | when the middleware is enabled, this is useful when you want to allow the
+    | callbacks to be accessed by some environments e.g. local environment.
+    */
+    'allowed_environments' => [
+        'local',
     ],
 
     /*

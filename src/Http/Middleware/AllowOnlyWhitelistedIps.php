@@ -15,6 +15,11 @@ class AllowOnlyWhitelistedIps
      */
     public function handle(Request $request, \Closure $next, ?bool $fuzzy_match = null): Response
     {
+        // If localhost or environment is local
+        if (app()->environment(config('mpesa.allowed_environments'))) {
+            return $next($request);
+        }
+
         $whitelisted_ips = config('mpesa.whitelisted_ips');
         $client_ip = $request->ip();
 
