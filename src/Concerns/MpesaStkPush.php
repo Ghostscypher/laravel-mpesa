@@ -14,7 +14,8 @@ trait MpesaStkPush
     /**
      * Generate the STK password
      *
-     * @param  mixed  $timestamp  The timestamp to use for the password in the format YmdHis
+     * @param  string  $shortcode  The shortcode to use for the transaction
+     * @param  string  $timestamp  The timestamp to use for the password in the format YmdHis
      */
     protected function generateStkPassword(string $shortcode, string $timestamp): string
     {

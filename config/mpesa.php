@@ -377,8 +377,23 @@ return [
     */
     'middlewares' => [
         // This middleware will allow only whitelisted IPs to access the mpesa callback routes
-        // \Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
+        \Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
     ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Bypassed environment
+    |--------------------------------------------------------------------------
+    |
+    | This is a list of environments that are allowed to access the mpesa callback
+    | when the middleware is enabled, this is useful when you want to allow the
+    | callbacks to be accessed by some environments e.g. local environment.
+    */
+    'allowed_environments' => [
+        'local',
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
