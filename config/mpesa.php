@@ -380,7 +380,6 @@ return [
         \Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | Bypassed environment
@@ -393,7 +392,6 @@ return [
     'allowed_environments' => [
         'local',
     ],
-
 
     /*
     |--------------------------------------------------------------------------
