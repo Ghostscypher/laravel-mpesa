@@ -36,7 +36,6 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Http\Client\Response transactionStatus(string $transaction_id, string $identifier_type = "4", ?string $result_url = null, ?string $queue_timeout_url = null, ?string $shortcode = null, string $remarks = "Remarks", string $occassion = "Occassion", ?string $initiator_name = null, ?string $initiator_password = null)
  * @method static \Illuminate\Http\Client\Response checkBalance(?string $result_url = null, ?string $queue_timeout_url = null, ?string $shortcode = null, string $identifier_type = "4", string $remarks = "Remarks", string $occassion = "Occassion", ?string $initiator_name = null, ?string $initiator_password = null)
  * @method static \Illuminate\Http\Client\Response reverseTransaction(string $transaction_id, string $amount, ?string $result_url = null, ?string $queue_timeout_url = null, string $reciever_identifier_type = "11", ?string $shortcode = null, string $remarks = "Remarks", string $occassion = "Occassion", ?string $initiator_name = null, ?string $initiator_password = null)
- *
  */
 class Mpesa extends Facade
 {
