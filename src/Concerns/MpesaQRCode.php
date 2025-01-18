@@ -45,7 +45,7 @@ trait MpesaQRCode
 
         $validator = self::validate($data, [
             'MerchantName' => 'required|string',
-            'Amount' => 'required|numeric|min:1',
+            'Amount' => 'required|numeric|min:0',
             'RefNo' => 'required|string',
             'CPI' => 'required|string',
             'TrxCode' => 'required|string',

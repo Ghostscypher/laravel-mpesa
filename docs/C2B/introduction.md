@@ -1,13 +1,18 @@
 ---
-title: Initiating C2B API
+title: Mpesa C2B APIs
 weight: 1
 ---
 
-## What is B2C API?
+## What is C2B?
 
-The B2C API is used to make payments from a Business to Customers (B2C). This is the most common API used by businesses to make payments to customers. The API is used to make payments to customers who have registered with the business.
+C2B (Customer to Business) is a payment service that allows customers to pay for goods and services using their mobile phones. The customer initiates the payment process by sending a payment request to the business. The business then processes the payment and sends a confirmation message to the customer.
 
-This API includes the following features:
+This trait contains several methods that will help you get started with the C2B APIs.
 
-1. **Payment Request**: This is the request that is sent to the customer to make a payment. The request includes the amount to be paid, the customer's phone number, and the business's account number.
-2. **Payment Confirmation**: This is the confirmation that the payment has been made. The confirmation includes the amount paid, the customer's phone number, and the business's account number.
+The methods include:
+
+- Registering URLs
+- Simulating a transaction (STK)
+- Querying a transaction status (STK)
+
+**Note**: All the resposes from the Safaricom API are in JSON format. Hence we will be returning a `JsonResponse` in all the methods.

@@ -60,7 +60,7 @@ trait MpesaB2C
             'InitiatorName' => 'required|string',
             'SecurityCredential' => 'required|string',
             'CommandID' => 'required|in:BusinessPayment,SalaryPayment,PromotionPayment',
-            'Amount' => 'required|numeric|min:1',
+            'Amount' => 'required|numeric|min:0',
             'PartyA' => 'required|string',
             'PartyB' => 'required|phone_number',
             'Remarks' => 'required|string',

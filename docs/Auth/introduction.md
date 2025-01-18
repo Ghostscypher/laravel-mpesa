@@ -21,7 +21,7 @@ MPESA_INITIATOR_NAME=
 MPESA_INITIATOR_PASSWORD=
 ```
 
-## `Mpesa::generateToken(): string`
+## Mpesa::generateToken(): string
 
 Do note that this is automatically called when you make a request to any of the Mpesa APIs. You can also manually generate the token by calling the `generateToken` method.
 
@@ -50,7 +50,7 @@ $headers = [
 
 The method will internally make an API request to the Safaricom API and return the token. The token is then stored in the database if we have set the `MPESA_FEATURE_STORE_TOKEN` environment variable to true. If not, the token is returned as a string.
 
-## `Mpesa::isTokenExpired(): bool`
+## Mpesa::isTokenExpired(): bool
 
 This method will check if the token has expired. If the token has expired, it will return `true`, otherwise `false`.
 
@@ -64,7 +64,7 @@ if (Mpesa::isTokenExpired()) {
 }
 ```
 
-## `Mpesa::generateSecurityCredential(string $initiatorPassword): string`
+## Mpesa::generateSecurityCredential(string $initiatorPassword): string
 
 This method will generate the security credential, it is used in some of the Mpesa APIs.
 If the `$initiatorPassword` is not provided, it will use the `MPESA_INITIATOR_PASSWORD` environment variable.
@@ -74,6 +74,9 @@ If the `$initiatorPassword` is not provided, it will use the `MPESA_INITIATOR_PA
 ```php
 use \Ghostscypher\Mpesa\Facades\Mpesa;
 
+/**
+* @throws \Ghostscypher\Mpesa\Exceptions\MpesaAuthException
+ */
 $securityCredential = Mpesa::generateSecurityCredential("myInitiatorPassword");
 
 // $securityCredential = ejfedsc...

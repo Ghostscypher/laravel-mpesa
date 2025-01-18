@@ -1,4 +1,4 @@
 ---
 title: C2B API
-weight: 1
+weight: 2
 ---
