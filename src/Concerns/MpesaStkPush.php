@@ -78,7 +78,7 @@ trait MpesaStkPush
             'Password' => 'required|string',
             'Timestamp' => 'required|date_format:YmdHis',
             'TransactionType' => 'required|string|in:CustomerPayBillOnline,CustomerBuyGoodsOnline',
-            'Amount' => 'required|numeric|min:1',
+            'Amount' => 'required|numeric|min:0',
             'PartyA' => 'required|string',
             'PartyB' => 'required|string',
             'PhoneNumber' => 'required|phone_number',

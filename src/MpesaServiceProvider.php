@@ -100,6 +100,7 @@ class MpesaServiceProvider extends PackageServiceProvider
             'balance_result_url' => '/lmp/balance/result',
             'balance_timeout_url' => '/lmp/balance/timeout',
             'bill_manager_callback_url' => '/lmp/bill/manager/callback',
+            'ratiba_callback' => '/lmp/ratiba/callback',
         ];
 
         // If the route is not set in the config file, use the default route

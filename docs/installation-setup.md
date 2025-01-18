@@ -1,3 +1,34 @@
+---
+title: Installation & setup
+weight: 3
+---
+
+laravel-event-sourcing can be installed via composer:
+
+```bash
+composer require ghostscypher/laravel-mpesa
+```
+
+To publish all the related files run:
+
+```bash
+php artisan mpesa:install
+```
+
+This will publish
+
+1. config file in your config directory. i.e. `config/mpesa.php`
+2. migration file for the mpesa transactions table. i.e. 
+    - `database/migrations/2024_08_01_000000_create_mpesa_callbacks_table.php`
+    - `database/migrations/2024_08_27_000000_create_mpesa_logs_table.php`
+    - `database/migrations/2024_08_27_000000_create_mpesa_tokens_table.php`
+3. controller file in your app directory. i.e. `app/Http/Controllers/LaravelMpesa/MpesaController.php`
+
+## Configuration
+
+The default configuration file looks like
+
+```php
 <?php
 
 return [
@@ -271,17 +302,6 @@ return [
     */
     'bill_manager_callback_url' => env('MPESA_BILL_MANAGER_CALLBACK_URL', ''),
 
-    /*
-    |--------------------------------------------------------------------------
-    | M-Ratiba Callback URL
-    |--------------------------------------------------------------------------
-    |
-    | This is the URL that safaricom will call when the transaction is complete
-    | for a M-Ratiba transaction
-    |
-    */
-    'ratiba_callback_url' => env('MPESA_RATIBA_CALLBACK_URL', ''),
-
     /*******************End of Mpesa options************************************/
 
     /*******************Start of customization options************************************/
@@ -473,3 +493,41 @@ return [
 
     /*******************End of customization options************************************/
 ];
+```
+
+The supporting environment variables are:
+
+```ini
+# Mpesa API Configuration
+MPESA_ENV=sandbox
+MPESA_CONSUMER_KEY=yourkey
+MPESA_CONSUMER_SECRET=yoursecret
+MPESA_SHORTCODE=174379
+MPESA_PASSKEY=bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919
+MEPESA_B2C_SHORTCODE=600000
+MPESA_INITIATOR_NAME=testapi
+MPESA_INITIATOR_PASSWORD=Safaricom123!
+MPESA_PARTNER_NAME=testapi
+
+# Features
+MPESA_FEATURE_STORE_TOKENS=true
+MPESA_FEATURE_REGISTER_ROUTES=true
+MPESA_FEATURE_ENABLE_LOGGING=true
+```
+
+Please update the configuration file with your own values.
+
+## Features
+
+By default the package comes with the following features:
+
+1. Store tokens in the database, this will prevent the need to generate tokens every time you make an API call.
+2. Register the routes for the mpesa callback, this will register the routes for the mpesa callback, if you wish to manually handle the callbacks, you can disable this feature.
+3. Enable logging of the transactions, this will store all the requests and responses in the database, useful for debugging. We recommend you enable this feature.
+4. We have provided a controller that will handle the mpesa callbacks, you can customize this controller to fit your needs.
+5. We have provided a middleware that will allow only whitelisted IPs to access the mpesa callback routes, you can customize this middleware to fit your needs, by default we only allow the local environment to access the callback routes. Comment out the middleware if you don't want to use it.
+6. We have provided a list of whitelisted IPs that safaricom will use to make the callbacks to your application, it's important to whitelist these IPs to ensure that the callbacks are not blocked by your firewall. It also ensures that the callbacks are secure and only safaricom.
+7. We have provided models that are used by the package, you can customize these models to fit your needs, especially when you need to add more fields or relationships etc. We will later on discuss how to customize the models for a multi-tenant application.
+8. We have provided listeners that will be used to log the requests and responses of the API calls, this is useful when you want to log the requests and responses for debugging purposes. You can customize these listeners to fit your needs or add more listeners.
+
+**Note** Most of the environment variables are self explanatory and we'll explore them one by one in the next sections.

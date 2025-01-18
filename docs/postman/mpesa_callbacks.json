@@ -25,7 +25,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Body\": {\r\n        \"stkCallback\": {\r\n            \"MerchantRequestID\": \"29115-34620561-1\",\r\n            \"CheckoutRequestID\": \"ws_CO_04082024120745239743456815\",\r\n            \"ResultCode\": 0,\r\n            \"ResultDesc\": \"The service request is processed successfully.\",\r\n            \"CallbackMetadata\": {\r\n                \"Item\": [\r\n                    {\r\n                        \"Name\": \"Amount\",\r\n                        \"Value\": 1\r\n                    },\r\n                    {\r\n                        \"Name\": \"MpesaReceiptNumber\",\r\n                        \"Value\": \"NLJ7RT61SV\"\r\n                    },\r\n                    {\r\n                        \"Name\": \"TransactionDate\",\r\n                        \"Value\": 20191219102115\r\n                    },\r\n                    {\r\n                        \"Name\": \"PhoneNumber\",\r\n                        \"Value\": 254708374149\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+					"raw": "{\r\n    \"Body\": {\r\n        \"stkCallback\": {\r\n            \"MerchantRequestID\": \"29115-34620561-1\",\r\n            \"CheckoutRequestID\": \"ws_CO_04082024120745239743456815\",\r\n            \"ResultCode\": 0,\r\n            \"ResultDesc\": \"The service request is processed successfully.\",\r\n            \"CallbackMetadata\": {\r\n                \"Item\": [\r\n                    {\r\n                        \"Name\": \"Amount\",\r\n                        \"Value\": 2\r\n                    },\r\n                    {\r\n                        \"Name\": \"MpesaReceiptNumber\",\r\n                        \"Value\": \"NLT7RT45SR\"\r\n                    },\r\n                    {\r\n                        \"Name\": \"TransactionDate\",\r\n                        \"Value\": 20191219102115\r\n                    },\r\n                    {\r\n                        \"Name\": \"PhoneNumber\",\r\n                        \"Value\": 254700000000\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,7 +33,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/lmp/stk/push/callback",
+					"raw": "{{base_url}}/lmp/stk/push/callback?pid=2-20250113212001-k13Z",
 					"host": [
 						"{{base_url}}"
 					],
@@ -42,6 +42,12 @@
 						"stk",
 						"push",
 						"callback"
+					],
+					"query": [
+						{
+							"key": "pid",
+							"value": "2-20250113212001-k13Z"
+						}
 					]
 				}
 			},
@@ -73,7 +79,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/lmp/stk/push/callback",
+					"raw": "{{base_url}}/lmp/stk/push/callback/test",
 					"host": [
 						"{{base_url}}"
 					],
@@ -81,7 +87,8 @@
 						"lmp",
 						"stk",
 						"push",
-						"callback"
+						"callback",
+						"test"
 					]
 				}
 			},
@@ -180,7 +187,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"TransactionType\": \"Pay Bill\",\r\n    \"TransID\": \"RKTQDM7W6S\",\r\n    \"TransTime\": \"20191122063845\",\r\n    \"TransAmount\": \"10\",\r\n    \"BusinessShortCode\": \"600638\",\r\n    \"BillRefNumber\": \"invoice008\",\r\n    \"InvoiceNumber\": \"\",\r\n    \"OrgAccountBalance\": \"\",\r\n    \"ThirdPartyTransID\": \"\",\r\n    \"MSISDN\": \"25470****149\",\r\n    \"FirstName\": \"John\",\r\n    \"MiddleName\": \"\",\r\n    \"LastName\": \"Doe\"\r\n}",
+					"raw": "{\r\n    \"TransactionType\": \"Pay Bill\",\r\n    \"TransID\": \"RKTQDM7W6S\",\r\n    \"TransTime\": \"20191122063845\",\r\n    \"TransAmount\": \"10\",\r\n    \"BusinessShortCode\": \"600638\",\r\n    \"BillRefNumber\": \"test#SMS\",\r\n    \"InvoiceNumber\": \"\",\r\n    \"OrgAccountBalance\": \"\",\r\n    \"ThirdPartyTransID\": \"\",\r\n    \"MSISDN\": \"25470****149\",\r\n    \"FirstName\": \"John\",\r\n    \"MiddleName\": \"\",\r\n    \"LastName\": \"Doe\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -526,6 +533,62 @@
 						"lmp",
 						"bill",
 						"manager",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mpesa Ratiba",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"responseHeader\": {\r\n        \"responseRefID\": \"0acc0239-20fa-4a52-8b9d-9bd64c0465c3\",\r\n        \"requestRefID\": \"0acc0239-20fa-4a52-8b9d-9bd64c0465c3\",\r\n        \"responseCode\": \"0\",\r\n        \"responseDescription\": \"The service request is processed successfully\"\r\n    },\r\n    \"responseBody\": {\r\n        \"responseData\": [\r\n            {\r\n                \"name\": \"TransactionID\",\r\n                \"value\": \"SC8F2IQMH5\"\r\n            },\r\n            {\r\n                \"name\": \"responseCode\",\r\n                \"value\": \"0\"\r\n            },\r\n            {\r\n                \"name\": \"Status\",\r\n                \"value\": \"OKAY\"\r\n            },\r\n            {\r\n                \"name\": \"Msisdn\",\r\n                \"value\": \"254******867\"\r\n            }\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/ratiba/callback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"ratiba",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mpesa Ratiba Failed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ResponseHeader\": {\r\n        \"responseRefID\": \"4dd9b5d9-d738-42ba-9326-2cc99e966000\",\r\n        \"requestRefID\": \"c8c2bb31-3b3a-402e-84fc-21ef35161e48\",\r\n        \"responseCode\": \"1037\",\r\n        \"responseDescription\": \"Error\"\r\n    },\r\n    \"ResponseBody\": {\r\n        \"ResponseData\": [\r\n            {\r\n                \"Name\": \"TransactionID\",\r\n                \"Value\": \"0000000000\"\r\n            },\r\n            {\r\n                \"Name\": \"responseCode\",\r\n                \"Value\": \"1037\"\r\n            },\r\n            {\r\n                \"Name\": \"Status\",\r\n                \"Value\": \"ERROR\"\r\n            },\r\n            {\r\n                \"Name\": \"Msisdn\",\r\n                \"Value\": \"*********149\"\r\n            }\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/lmp/ratiba/callback",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lmp",
+						"ratiba",
 						"callback"
 					]
 				}

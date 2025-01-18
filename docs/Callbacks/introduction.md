@@ -1,3 +1,50 @@
+---
+title: Handling callbacks
+weight: 1
+---
+
+## Introduction
+
+Callbacks are a way for the API to notify your application when a certain event has occurred. For example, when a payment has been processed, the API will send a callback to your application to notify you of the payment status.
+
+By default the callbacks urls are registered by the package, please see the configuration file for more information on the numerous callbacks that are available.
+
+The following are the available callbacks:
+
+```php
+$default_routes = [
+    'stk_push_callback_url' => '/lmp/stk/push/callback',
+    'c2b_validation_url' => '/lmp/c2b/validation',
+    'c2b_confirmation_url' => '/lmp/c2b/confirmation',
+    'b2c_result_url' => '/lmp/b2c/result',
+    'b2c_timeout_url' => '/lmp/b2c/timeout',
+    'b2b_result_url' => '/lmp/b2b/result',
+    'b2b_timeout_url' => '/lmp/b2b/timeout',
+    'b2b_stk_callback_url' => '/lmp/b2b/stk/callback',
+    'status_result_url' => '/lmp/status/result',
+    'status_timeout_url' => '/lmp/status/timeout',
+    'reversal_result_url' => '/lmp/reversal/result',
+    'reversal_timeout_url' => '/lmp/reversal/timeout',
+    'balance_result_url' => '/lmp/balance/result',
+    'balance_timeout_url' => '/lmp/balance/timeout',
+    'bill_manager_callback_url' => '/lmp/bill/manager/callback',
+    'ratiba_callback' => '/lmp/ratiba/callback',
+];
+```
+
+## Testing callbacks
+
+We have included a postman collection to help you get started with testing callback URLs. [Postman Collection](/docs/laravel-mpesa/v1/postman/mpesa_callbacks.json)
+
+## Handling callbacks
+
+To handle callbacks, you need to create a route that will listen for the callback and then process the callback. The package provides a middleware `\Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps` that you can use to verify the that the IP address of the callback is from Safaricom.
+
+We also provide a controller `\Ghostscypher\Mpesa\Http\Controllers\LaravelMpesa\MpesaController` that you can use to handle the callbacks. The controller has methods that will handle the various callbacks.
+
+The given controller has methods that will handle the various callbacks. You can modify the controller to suit your needs.
+
+```php
 <?php
 
 namespace App\Http\Controllers\LaravelMpesa;
@@ -472,3 +519,65 @@ class MpesaController
         return $response;
     }
 }
+```
+
+## Listeners
+
+As an alternative to using the controller, you can use listeners to listen for the callbacks. By leaving the controller as it is we are guaranteed that the callbacks will be logged to the database.
+
+The package provides an event `\Ghostscypher\Mpesa\Events\MpesaCallbackReceived` that you can listen to. The event has two parameters, the request object and the type of callback.
+
+The types are as follows:
+
+- `stk` - STK push callback
+- `c2b_validation` - C2B validation callback
+- `c2b_confirmation` - C2B confirmation callback
+- `b2c_result` - B2C result callback
+- `b2c_timeout` - B2C timeout callback
+- `b2b_result` - B2B result callback
+- `b2b_timeout` - B2B timeout callback
+- `b2b_stk` - B2B STK callback
+- `status_result` - Transaction status result callback
+- `status_timeout` - Transaction status timeout callback
+- `reversal_result` - Reversal result callback
+- `reversal_timeout` - Reversal timeout callback
+- `balance_result` - Account balance result callback
+- `balance_timeout` - Account balance timeout callback
+- `bill_manager` - Bill manager callback
+- `mpesa_ratiba` - Mpesa ratiba callback
+
+Here's a simple listener that listens for the STK push callback:
+
+```php
+<?php
+
+namespace App\Listeners;
+use Ghostscypher\Mpesa\Events\MpesaCallbackReceived;
+
+
+class StkPushCallbackListener
+{
+    /**
+     * Handle the event.
+     *
+     * @param  MpesaCallbackReceived  $event
+     * @return void
+     */
+    public function handle(MpesaCallbackReceived $event)
+    {
+        // Get the request object
+        $request = $event->request;
+
+        // Get the type of callback
+        $type = $event->type;
+
+        // Your code here
+        If ($type !== 'stk') {
+            // Do nothing
+            return;
+        }
+
+        // Do something with the request
+    }
+}
+```
