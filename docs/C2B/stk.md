@@ -17,14 +17,14 @@ MPESA_SHORTCODE=
 MPESA_PASSKEY=
 ```
 
-## Mpesa::stkPush(string $phone_number, string $amount, string $account_reference = 'Test', ?string $callback_url = null, string $description = 'Description', string $transaction_type = 'CustomerPayBillOnline', ?string $shortcode = null, ?string $business_short_code = null, ?string $party_a = null): JsonResponse
+## STK Push
 
 This is used to initiate an STK push request to the customer's phone number.
 
 The following parameters are supported:
 
-- `phone_number` *(required)*: The phone number of the customer. The number is automatically formatted to the correct format. So it means you can pass the phone number in following formats. i.e. `254712345678`, `+254712345678`, `0712345678`
-- `amount` *(required)*: The amount to be paid by the customer.
+- `phone_number` : The phone number of the customer. The number is automatically formatted to the correct format. So it means you can pass the phone number in following formats. i.e. `254712345678`, `+254712345678`, `0712345678`
+- `amount` : The amount to be paid by the customer.
 - `account_reference` *(optional)*: The account reference. This is used to identify the transaction. It is usually a unique identifier for the transaction. i.e. the account number, order number, etc.
 - `callback_url` *(optional)*: The URL to which the Mpesa API will send the callback response. This is where you will handle the response from the Mpesa API. If not provided, the default callback URL will be used.
 - `description` *(optional)*: The description of the transaction. This is used to describe the transaction. i.e. the product name, service name, etc. This appears in the admin portal.
@@ -38,11 +38,11 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
 
 /**
  * @throws \Ghostscypher\Mpesa\Exceptions\MpesaAuthException
- * @throws \Ghostscypher\Mpesa\Exceptions\MpesaRequestException
+ * @throws \Ghostscypher\Mpesa\Exceptions\MpesaValidationException
  */
 $response = Mpesa::stkPush('254712345678', '1', 'Test');
 
-if($response->isSuccessfull()) {
+if($response->successfull()) {
     // Success
     $response = $response->json();
     // $response = ['MerchantRequestID' => '12345', 'CheckoutRequestID' => '12345', 'ResponseCode' => '0', 'ResponseDescription' => 'Success. Request accepted for processing', 'CustomerMessage' => 'Success. Request accepted for processing']
@@ -53,13 +53,13 @@ if($response->isSuccessfull()) {
 }
 ```
 
-## Mpesa::stkPushQuery(string $checkout_request_id, ?string $shortcode = null): Response
+## STK Push Query
 
 This is used to query the status of an STK push request.
 
 The following parameters are supported:
 
-- `checkout_request_id` *(required)*: The checkout request ID. This is the ID that is returned when you initiate an STK push request.
+- `checkout_request_id` : The checkout request ID. This is the ID that is returned when you initiate an STK push request.
 - `shortcode` *(optional)*: The shortcode to be used for the transaction. If not provided, the default shortcode will be used.
 
 ```php
@@ -68,17 +68,15 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
 
 /**
  * @throws \Ghostscypher\Mpesa\Exceptions\MpesaAuthException
- * @throws \Ghostscypher\Mpesa\Exceptions\MpesaRequestException
+ * @throws \Ghostscypher\Mpesa\Exceptions\MpesaValidationException
  */
-$response = Mpesa::stkPushQuery('wc_123456789');
+$response = Mpesa::stkPushQuery('wco_123456789');
 
-if($response->isSuccessfull()) {
+if($response->successfull()) {
     // Success
     $response = $response->json();
-    // $response = ['MerchantRequestID' => '12345', 'CheckoutRequestID' => '12345', 'ResponseCode' => '0', 'ResponseDescription' => 'Success. Request accepted for processing', 'CustomerMessage' => 'Success. Request accepted for processing']
 } else {
     // Error
     $response = $response->json();
-    // $response = ['errorCode' => '400.001.02', 'errorMessage' => 'Invalid Access Token']
 }
 ```

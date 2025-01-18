@@ -271,6 +271,18 @@ return [
     */
     'bill_manager_callback_url' => env('MPESA_BILL_MANAGER_CALLBACK_URL', ''),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | M-Ratiba Callback URL
+    |--------------------------------------------------------------------------
+    |
+    | This is the URL that safaricom will call when the transaction is complete
+    | for a M-Ratiba transaction
+    |
+    */
+    'ratiba_callback_url' => env('MPESA_RATIBA_CALLBACK_URL', ''),
+
     /*******************End of Mpesa options************************************/
 
     /*******************Start of customization options************************************/

@@ -16,8 +16,8 @@ trait MpesaQRCode
      * @param  string  $amount  The amount to pay
      * @param  ?string  $CPI  The Consumer Paybill Number
      * @param  string  $trx_code  The transaction code to use
-     *                            - BG: Buy Goods)
-     *                            - WA: Withdrawal at Agent till)
+     *                            - BG: Buy Goods
+     *                            - WA: Withdrawal at Agent till
      *                            - PB: Paybill
      *                            - SM: Send Money (Mobile number)
      *                            - SB: Sent to Business. Business number CPI in MSISDN format.

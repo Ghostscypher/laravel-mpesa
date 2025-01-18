@@ -28,4 +28,5 @@ Route::middleware(config('mpesa.middlewares'))->group(function () {
     Route::post(config('mpesa.balance_result_url'), [config('mpesa.controller'), 'balanceResult']);
     Route::post(config('mpesa.balance_timeout_url'), [config('mpesa.controller'), 'balanceTimeout']);
     Route::post(config('mpesa.bill_manager_callback_url'), [config('mpesa.controller'), 'billManagerCallback']);
+    Route::post(config('mpesa.ratiba_callback'), [config('mpesa.controller'), 'ratibaCallback']);
 });

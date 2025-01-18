@@ -16,3 +16,15 @@ The methods include:
 - Querying a transaction status (STK)
 
 **Note**: All the resposes from the Safaricom API are in JSON format. Hence we will be returning a `JsonResponse` in all the methods.
+
+The following .env variables are required in order to authenticate with the Mpesa API:
+
+```dotenv
+MPESA_CONSUMER_KEY=
+MPESA_CONSUMER_SECRET=
+MPESA_ENVIRONMENT=
+MPESA_SHORTCODE=
+MPESA_PASSKEY=
+MPESA_INITIATOR_NAME=
+MPESA_INITIATOR_PASSWORD=
+```

@@ -7,7 +7,7 @@ weight: 3
 
 To receive callbacks from Safaricom, you need to register the URLs that Safaricom will send the confirmation/validation callbacks to.
 
-## Mpesa::registerUrls(string $confirmationUrl, string $validationUrl, string $responseType = 'Completed', ?string $shortcode = null): Response
+## Register confirmation and validation URLs
 
 To register the URLs, you need to call the `registerUrls` method on the `Mpesa` facade.
 
@@ -24,7 +24,7 @@ This method takes the following parameters:
 - In order to enable validation, you will need to contact Safaricom to enable it for you.
 
 ```php
-use Laravel\MPesa\Facades\Mpesa;
+use Ghostscypher\Mpesa\Facades\Mpesa;
 
 /**
  * @throws \Ghostscypher\Mpesa\Exceptions\MpesaAuthException
@@ -33,7 +33,7 @@ use Laravel\MPesa\Facades\Mpesa;
 $response = Mpesa::registerUrls('https://example.com/confirmation', 'https://example.com/validation', 'Completed', '10000');
 
 // Covert to JSON
-if($response->isSuccessful()) {
+if($response->successful()) {
     // Success
     $response = $response->json();
 } else {

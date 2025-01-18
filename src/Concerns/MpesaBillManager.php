@@ -275,7 +275,7 @@ trait MpesaBillManager
 
     /**
      * This API call will allow you to reconcile the invoices that have been sent to your customers.
-     * Please make sure that you will be required to handle the callbacks associated with the bill manager.
+     * Please note that you will be required to handle the callbacks associated with the bill manager.
      *
      * @param  string  $transaction_id  - Mpesa transaction ID
      * @param  int  $paid_amount  - The amount paid by the customer

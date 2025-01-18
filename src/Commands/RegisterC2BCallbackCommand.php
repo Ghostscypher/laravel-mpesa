@@ -20,7 +20,7 @@ class RegisterC2BCallbackCommand extends Command
         try {
             $response = app('mpesa')->registerUrl($validation_url, $confirmation_url, $response_type, $shortcode);
 
-            if ($response->isSuccessful()) {
+            if ($response->successful()) {
                 $this->info('C2B callback URL registered successfully!');
                 $this->info($response->json());
             } else {
