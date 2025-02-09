@@ -14,7 +14,7 @@ Ensure that you have the following environment variables set in your `.env` file
 ```dotenv
 MPESA_CONSUMER_KEY=
 MPESA_CONSUMER_SECRET=
-MPESA_ENVIRONMENT=
+MPESA_ENV=
 MPESA_SHORTCODE=
 MPESA_PASSKEY=
 MPESA_INITIATOR_NAME=

@@ -22,7 +22,7 @@ The following .env variables are required in order to authenticate with the Mpes
 ```dotenv
 MPESA_CONSUMER_KEY=
 MPESA_CONSUMER_SECRET=
-MPESA_ENVIRONMENT=
+MPESA_ENV=
 MPESA_SHORTCODE=
 MPESA_PASSKEY=
 MPESA_INITIATOR_NAME=

@@ -12,7 +12,7 @@ The following .env variables are required in order to authenticate with the Mpes
 ```dotenv
 MPESA_CONSUMER_KEY=
 MPESA_CONSUMER_SECRET=
-MPESA_ENVIRONMENT=
+MPESA_ENV=
 MPESA_SHORTCODE=
 MPESA_INITIATOR_NAME=
 MPESA_INITIATOR_PASSWORD=
@@ -60,7 +60,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::B2B('600000', '1', 'Test');
 
-if($response->successfull()) {
+if($response->getStatusCode() == 200) {
     // Success
     $response = $response->json();
 } else {
@@ -98,7 +98,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::B2BRemitTax('1', 'Test');
 
-if($response->successfull()) {
+if($response->getStatusCode() == 200) {
     // Success
     $response = $response->json();
 } else {
@@ -130,7 +130,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::B2BStkPush('600000', '1', 'Test');
 
-if($response->successfull()) {
+if($response->getStatusCode() == 200) {
     // Success
     $response = $response->json();
 } else {
