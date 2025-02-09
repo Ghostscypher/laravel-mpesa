@@ -271,7 +271,6 @@ return [
     */
     'bill_manager_callback_url' => env('MPESA_BILL_MANAGER_CALLBACK_URL', ''),
 
-
     /*
     |--------------------------------------------------------------------------
     | M-Ratiba Callback URL

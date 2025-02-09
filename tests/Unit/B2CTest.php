@@ -19,7 +19,7 @@ it('can send B2C request', function () {
     expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
 });
 
-it("can send B2C Ratiba request", function () {
+it('can send B2C Ratiba request', function () {
     Http::fake([
         '*' => Http::response([
             'ResponseDescription' => 'success',
@@ -29,7 +29,7 @@ it("can send B2C Ratiba request", function () {
         ], 200),
     ]);
 
-    $response = Mpesa::ratiba("lipa mdogo", "254708374149", 500, "20250101", "20250131", 4, "January 2025 Payment");
+    $response = Mpesa::ratiba('lipa mdogo', '254708374149', 500, '20250101', '20250131', 4, 'January 2025 Payment');
 
     expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
 });

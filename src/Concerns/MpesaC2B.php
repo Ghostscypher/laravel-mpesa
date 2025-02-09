@@ -54,14 +54,14 @@ trait MpesaC2B
      * @param  string  $start_date  - The date when the standing order should start
      * @param  string  $end_date  - The date when the standing order should end
      * @param  string  $frequency  - The frequency of the standing order
-     *                               - 1 - One Off
-     *                               - 2 - Daily
-     *                               - 3 - Weekly
-     *                               - 4 - Monthly
-     *                               - 5 - Bi-Monthly
-     *                               - 6 - Quarterly
-     *                               - 7 - Half Year
-     *                               - 8 - Yearly
+     *                             - 1 - One Off
+     *                             - 2 - Daily
+     *                             - 3 - Weekly
+     *                             - 4 - Monthly
+     *                             - 5 - Bi-Monthly
+     *                             - 6 - Quarterly
+     *                             - 7 - Half Year
+     *                             - 8 - Yearly
      * @param  string  $account_reference  - The account reference for the transaction
      * @param  string  $callback_url  - The URL to receive the result of the transaction
      * @param  string  $description  - The description of the transaction
@@ -79,14 +79,13 @@ trait MpesaC2B
         string $start_date,
         string $end_date,
         string $frequency,
-        string $account_reference = "Account",
+        string $account_reference = 'Account',
         ?string $callback_url = null,
-        string $description = "Payment",
+        string $description = 'Payment',
         ?string $business_short_code = null,
-        string $transaction_type = "Standing Order Customer Pay Bill",
-        string $reciever_identifier_type = "4"
-    ): Response
-    {
+        string $transaction_type = 'Standing Order Customer Pay Bill',
+        string $reciever_identifier_type = '4'
+    ): Response {
         // Generate token
         $this->generateToken();
 
@@ -126,5 +125,4 @@ trait MpesaC2B
 
         return $this->http_client->post('standingorder/v1/createStandingOrderExternal', $validator->validated());
     }
-
 }
