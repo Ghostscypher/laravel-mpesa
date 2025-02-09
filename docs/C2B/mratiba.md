@@ -54,7 +54,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::ratiba('Lipa Mdogo Mdogo', '254712345678', '1', '20221201', '20231201', '3', 'July Payment');
 
-if($response->success()) {
+if($response->getStatusCode() == 200) {
     // Success
     $response = $response->json();
 } else {

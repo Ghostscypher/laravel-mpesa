@@ -42,7 +42,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::stkPush('254712345678', '1', 'Test');
 
-if($response->success()) {
+if($response->getStatusCode() == 200) {
     // Success
     $response = $response->json();
     // $response = ['MerchantRequestID' => '12345', 'CheckoutRequestID' => '12345', 'ResponseCode' => '0', 'ResponseDescription' => 'Success. Request accepted for processing', 'CustomerMessage' => 'Success. Request accepted for processing']
@@ -72,7 +72,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::stkPushQuery('wco_123456789');
 
-if($response->success()) {
+if($response->getStatusCode() == 200) {
     // Success
     $response = $response->json();
 } else {
