@@ -1,5 +1,5 @@
 ---
-title: Mpesa Utility APIs
+title: Mpesa B2B APIs
 weight: 1
 ---
 
@@ -60,7 +60,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::B2B('600000', '1', 'Test');
 
-if($response->getStatusCode() == 200) {
+if($response->successful()) {
     // Success
     $response = $response->json();
 } else {
@@ -98,7 +98,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::B2BRemitTax('1', 'Test');
 
-if($response->getStatusCode() == 200) {
+if($response->successful()) {
     // Success
     $response = $response->json();
 } else {
@@ -130,7 +130,7 @@ use \Ghostscypher\Mpesa\Facades\Mpesa;
  */
 $response = Mpesa::B2BStkPush('600000', '1', 'Test');
 
-if($response->getStatusCode() == 200) {
+if($response->successful()) {
     // Success
     $response = $response->json();
 } else {
