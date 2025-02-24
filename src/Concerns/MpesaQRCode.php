@@ -44,11 +44,11 @@ trait MpesaQRCode
         ];
 
         $validator = self::validate($data, [
-            'MerchantName' => 'required|string',
+            'MerchantName' => 'required',
             'Amount' => 'required|numeric|min:0',
-            'RefNo' => 'required|string',
-            'CPI' => 'required|string',
-            'TrxCode' => 'required|string',
+            'RefNo' => 'required',
+            'CPI' => 'required',
+            'TrxCode' => 'required',
             'Size' => 'required|integer',
         ]);
 

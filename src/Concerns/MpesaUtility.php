@@ -52,17 +52,17 @@ trait MpesaUtility
             'Remarks' => $remarks,
             'Occassion' => $occassion,
         ], [
-            'Initiator' => 'required|string',
-            'SecurityCredential' => 'required|string',
-            'CommandID' => 'required|string|in:TransactionStatusQuery',
-            'TransactionID' => 'required|string',
-            'OriginatorConversationID' => 'required|string',
-            'PartyA' => 'required|string',
-            'IdentifierType' => 'required|string',
+            'Initiator' => 'required',
+            'SecurityCredential' => 'required',
+            'CommandID' => 'required|in:TransactionStatusQuery',
+            'TransactionID' => 'required',
+            'OriginatorConversationID' => 'required',
+            'PartyA' => 'required',
+            'IdentifierType' => 'required',
             'ResultURL' => 'required|url',
             'QueueTimeOutURL' => 'required|url',
-            'Remarks' => 'required|string',
-            'Occassion' => 'required|string',
+            'Remarks' => 'required',
+            'Occassion' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -110,15 +110,15 @@ trait MpesaUtility
             'Remarks' => $remarks,
             'Occassion' => $occassion,
         ], [
-            'Initiator' => 'required|string',
-            'SecurityCredential' => 'required|string',
-            'CommandID' => 'required|string|in:AccountBalance',
-            'PartyA' => 'required|string',
-            'IdentifierType' => 'required|string',
+            'Initiator' => 'required',
+            'SecurityCredential' => 'required',
+            'CommandID' => 'required|in:AccountBalance',
+            'PartyA' => 'required',
+            'IdentifierType' => 'required',
             'ResultURL' => 'required|url',
             'QueueTimeOutURL' => 'required|url',
-            'Remarks' => 'required|string',
-            'Occassion' => 'required|string',
+            'Remarks' => 'required',
+            'Occassion' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -171,17 +171,17 @@ trait MpesaUtility
             'Remarks' => $remarks,
             'Occassion' => $occassion,
         ], [
-            'Initiator' => 'required|string',
-            'SecurityCredential' => 'required|string',
-            'CommandID' => 'required|string|in:TransactionStatusQuery',
-            'TransactionID' => 'required|string',
-            'OriginatorConversationID' => 'required|string',
-            'ReceiverParty' => 'required|string',
-            'ReceiverIdentifierType' => 'required|string',
+            'Initiator' => 'required',
+            'SecurityCredential' => 'required',
+            'CommandID' => 'required|in:TransactionStatusQuery',
+            'TransactionID' => 'required',
+            'OriginatorConversationID' => 'required',
+            'ReceiverParty' => 'required',
+            'ReceiverIdentifierType' => 'required',
             'ResultURL' => 'required|url',
             'QueueTimeOutURL' => 'required|url',
-            'Remarks' => 'required|string',
-            'Occassion' => 'required|string',
+            'Remarks' => 'required',
+            'Occassion' => 'required',
         ]);
 
         if ($validator->fails()) {

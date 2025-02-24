@@ -57,7 +57,7 @@ trait MpesaBillManager
             'callbackurl' => 'required|url',
             'sendReminders' => 'integer|in:0,1',
             'logo' => 'nullable|url',
-            'shortcode' => 'required|string',
+            'shortcode' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -118,7 +118,7 @@ trait MpesaBillManager
             'callbackurl' => 'required|url',
             'sendReminders' => 'integer|in:0,1',
             'logo' => 'nullable|url',
-            'shortcode' => 'required|string',
+            'shortcode' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -174,16 +174,16 @@ trait MpesaBillManager
         $this->generateToken();
 
         $validator = self::validate($data, [
-            'externalReference' => 'required|string',
-            'billedFullName' => 'required|string',
+            'externalReference' => 'required',
+            'billedFullName' => 'required',
             'billedPhoneNumber' => 'required|phone_number_lax',
-            'billedPeriod' => 'required|string',
-            'invoiceName' => 'required|string',
+            'billedPeriod' => 'required',
+            'invoiceName' => 'required',
             'dueDate' => 'required|date',
-            'accountReference' => 'required|string',
+            'accountReference' => 'required',
             'amount' => 'required|numeric',
             'invoiceItems' => 'required|array',
-            'invoiceItems.*.itemName' => 'required|string',
+            'invoiceItems.*.itemName' => 'required',
             'invoiceItems.*.amount' => 'required|numeric',
         ]);
 
@@ -253,16 +253,16 @@ trait MpesaBillManager
         $this->generateToken();
 
         $validator = self::validate($data, [
-            '*.externalReference' => 'required|string',
-            '*.billedFullName' => 'required|string',
+            '*.externalReference' => 'required',
+            '*.billedFullName' => 'required',
             '*.billedPhoneNumber' => 'required|phone_number_lax',
-            '*.billedPeriod' => 'required|string',
-            '*.invoiceName' => 'required|string',
+            '*.billedPeriod' => 'required',
+            '*.invoiceName' => 'required',
             '*.dueDate' => 'required|date',
-            '*.accountReference' => 'required|string',
+            '*.accountReference' => 'required',
             '*.amount' => 'required|numeric',
             '*.invoiceItems' => 'required|array',
-            '*.invoiceItems.*.itemName' => 'required|string',
+            '*.invoiceItems.*.itemName' => 'required',
             '*.invoiceItems.*.amount' => 'required|numeric',
         ]);
 
@@ -306,12 +306,12 @@ trait MpesaBillManager
             'dateCreated' => $date_created,
             'accountReference' => $account_reference,
         ], [
-            'shortcode' => 'required|string',
-            'transactionId' => 'required|string',
+            'shortcode' => 'required',
+            'transactionId' => 'required',
             'paidAmount' => 'required|numeric',
             'msisdn' => 'required|phone_number',
             'dateCreated' => 'required|date',
-            'accountReference' => 'required|string',
+            'accountReference' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -337,7 +337,7 @@ trait MpesaBillManager
         $this->generateToken();
 
         $validator = self::validate($data, [
-            'externalReference' => 'required|string',
+            'externalReference' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -368,7 +368,7 @@ trait MpesaBillManager
         $this->generateToken();
 
         $validator = self::validate($data, [
-            '*.externalReference' => 'required|string',
+            '*.externalReference' => 'required',
         ]);
 
         if ($validator->fails()) {
