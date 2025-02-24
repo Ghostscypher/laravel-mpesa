@@ -56,17 +56,17 @@ trait MpesaB2C
             'ResultURL' => $result_url ?? self::generateCallbackUrl(config('mpesa.b2c_result_url')),
             'Occassion' => $occasion,
         ], [
-            'OriginatorConversationID' => 'required|string',
-            'InitiatorName' => 'required|string',
-            'SecurityCredential' => 'required|string',
+            'OriginatorConversationID' => 'required',
+            'InitiatorName' => 'required',
+            'SecurityCredential' => 'required',
             'CommandID' => 'required|in:BusinessPayment,SalaryPayment,PromotionPayment',
             'Amount' => 'required|numeric|min:0',
-            'PartyA' => 'required|string',
+            'PartyA' => 'required',
             'PartyB' => 'required|phone_number',
-            'Remarks' => 'required|string',
+            'Remarks' => 'required',
             'QueueTimeOutURL' => 'required|url',
             'ResultURL' => 'required|url',
-            'Occassion' => 'required|string',
+            'Occassion' => 'required',
         ]);
 
         if ($validator->fails()) {

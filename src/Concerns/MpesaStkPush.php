@@ -63,7 +63,7 @@ trait MpesaStkPush
         // Validate the parameters
         $validator = self::validate([
             'BusinessShortCode' => $business_short_code ?? config('mpesa.shortcode'),
-            'Password' => $this->generateStkPassword($shortcode ?? config('mpesa.shortcode'), $timestamp),
+            'Password' => $this->generateStkPassword($business_short_code ?? config('mpesa.shortcode'), $timestamp),
             'Timestamp' => $timestamp,
             'TransactionType' => $transaction_type,
             'Amount' => $amount,
@@ -75,16 +75,16 @@ trait MpesaStkPush
             'TransactionDesc' => $description,
         ], [
             'BusinessShortCode' => 'required|numeric',
-            'Password' => 'required|string',
+            'Password' => 'required',
             'Timestamp' => 'required|date_format:YmdHis',
-            'TransactionType' => 'required|string|in:CustomerPayBillOnline,CustomerBuyGoodsOnline',
+            'TransactionType' => 'required|in:CustomerPayBillOnline,CustomerBuyGoodsOnline',
             'Amount' => 'required|numeric|min:0',
-            'PartyA' => 'required|string',
-            'PartyB' => 'required|string',
+            'PartyA' => 'required',
+            'PartyB' => 'required',
             'PhoneNumber' => 'required|phone_number',
             'CallBackURL' => 'required|url',
             'AccountReference' => 'required_if:TransactionType,CustomerBuyGoodsOnline|string',
-            'TransactionDesc' => 'required|string',
+            'TransactionDesc' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -120,9 +120,9 @@ trait MpesaStkPush
         // Validate the parameters
         $validator = self::validate($data, [
             'BusinessShortCode' => 'required|numeric',
-            'Password' => 'required|string',
+            'Password' => 'required',
             'Timestamp' => 'required|date_format:YmdHis',
-            'CheckoutRequestID' => 'required|string',
+            'CheckoutRequestID' => 'required',
         ]);
 
         if ($validator->fails()) {
