@@ -128,9 +128,14 @@ jobs:
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
         if: (matrix.laravel == '7.*' || matrix.laravel == '8.*') && matrix.php != ''
-
+      - name: Ensure code coverage driver is set to "pcov"
+        run: |
+          echo "pcov.enabled=1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/pcov.ini
+          echo "pcov.directory=." >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/pcov.ini
+          echo "pcov.exclude=\"/vendor/\"" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/pcov.ini
+        if: matrix.php != ''
       - name: Execute tests
-        run: vendor/bin/pest
+        run: vendor/bin/pest --no-coverage
         env:
           DB_USERNAME: user
           DB_PASSWORD: secret
