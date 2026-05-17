@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\LaravelMpesa;
 
+use Ghostscypher\Mpesa\Events\MpesaCallbackReceived;
 use Ghostscypher\Mpesa\Facades\Mpesa;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,8 +19,8 @@ class MpesaController
     /**
      * Log the request
      *
-     * @param  \Illuminate\Http\Request  $request  The request object
-     * @param  \Illuminate\Http\JsonResponse  $response  The response object
+     * @param  Request  $request  The request object
+     * @param  JsonResponse  $response  The response object
      * @param  string  $type  The type of callback
      * @param  string|null  $reference_id  The reference id
      */
@@ -65,7 +66,7 @@ class MpesaController
     public function stkPushCallback(Request $request): JsonResponse
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'stk'));
+        event(new MpesaCallbackReceived($request, 'stk'));
 
         // Get checkout id
         $checkout_request_id = $request->input('Body.stkCallback.CheckoutRequestID');
@@ -98,7 +99,7 @@ class MpesaController
     public function c2bValidation(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'c2b_validation'));
+        event(new MpesaCallbackReceived($request, 'c2b_validation'));
 
         // TODO: Perform your validation here
         // Your code here
@@ -142,7 +143,7 @@ class MpesaController
     public function c2bConfirmation(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'c2b_confirmation'));
+        event(new MpesaCallbackReceived($request, 'c2b_confirmation'));
 
         // Get the transaction id
         $transaction_id = $request->input('TransID');
@@ -162,7 +163,7 @@ class MpesaController
     public function b2cResult(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'b2c_result'));
+        event(new MpesaCallbackReceived($request, 'b2c_result'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -187,7 +188,7 @@ class MpesaController
     public function b2cTimeout(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'b2c_timeout'));
+        event(new MpesaCallbackReceived($request, 'b2c_timeout'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -211,7 +212,7 @@ class MpesaController
     public function b2bResult(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'b2b_result'));
+        event(new MpesaCallbackReceived($request, 'b2b_result'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -236,7 +237,7 @@ class MpesaController
     public function b2bTimeout(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'b2b_timeout'));
+        event(new MpesaCallbackReceived($request, 'b2b_timeout'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -260,7 +261,7 @@ class MpesaController
     public function b2bStkCallback(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'b2b_stk'));
+        event(new MpesaCallbackReceived($request, 'b2b_stk'));
 
         // Your code here
         $transaction_id = $request->input('transactionId');
@@ -283,7 +284,7 @@ class MpesaController
     public function statusResult(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'status_result'));
+        event(new MpesaCallbackReceived($request, 'status_result'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -308,7 +309,7 @@ class MpesaController
     public function statusTimeout(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'status_timeout'));
+        event(new MpesaCallbackReceived($request, 'status_timeout'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -332,7 +333,7 @@ class MpesaController
     public function reversalResult(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'reversal_result'));
+        event(new MpesaCallbackReceived($request, 'reversal_result'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -357,7 +358,7 @@ class MpesaController
     public function reversalTimeout(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'reversal_result'));
+        event(new MpesaCallbackReceived($request, 'reversal_result'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -381,7 +382,7 @@ class MpesaController
     public function balanceResult(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'balance_result'));
+        event(new MpesaCallbackReceived($request, 'balance_result'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
@@ -411,7 +412,7 @@ class MpesaController
     public function balanceTimeout(Request $request)
     {
         // Dispatch the event
-        event(new \Ghostscypher\Mpesa\Events\MpesaCallbackReceived($request, 'balance_timeout'));
+        event(new MpesaCallbackReceived($request, 'balance_timeout'));
 
         // Your code here
         $transaction_id = $request->input('Result.TransactionID');
