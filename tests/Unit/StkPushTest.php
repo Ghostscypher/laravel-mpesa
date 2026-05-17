@@ -1,6 +1,7 @@
 <?php
 
 use Ghostscypher\Mpesa\Facades\Mpesa;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 it('can send stkpush', function () {
@@ -15,5 +16,5 @@ it('can send stkpush', function () {
 
     $response = Mpesa::stkPush('254708374149', 1, 'Test Account');
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });

@@ -2,6 +2,7 @@
 
 // Test authorization
 use Ghostscypher\Mpesa\Facades\Mpesa;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 it('can send B2C request', function () {
@@ -16,7 +17,7 @@ it('can send B2C request', function () {
 
     $response = Mpesa::B2C('254708374149', 500, 'https://example.com/timeout', 'https://example.com/result');
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can send B2C Ratiba request', function () {
@@ -31,5 +32,5 @@ it('can send B2C Ratiba request', function () {
 
     $response = Mpesa::ratiba('lipa mdogo', '254708374149', 500, '20250101', '20250131', 4, 'January 2025 Payment');
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });

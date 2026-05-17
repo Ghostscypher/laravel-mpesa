@@ -3,6 +3,7 @@
 // Test authorization
 
 use Ghostscypher\Mpesa\Facades\Mpesa;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 it('can opt in', function () {
@@ -18,7 +19,7 @@ it('can opt in', function () {
     $response = Mpesa::billManagerOptIn('email@test.com', '254700000000', 'https://example.com/timeout', true, 'https://example.com/timeout');
 
     // Expect no exception
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can update details', function () {
@@ -33,7 +34,7 @@ it('can update details', function () {
 
     $response = Mpesa::billManagerUpdateDetails('email@test.com', '254700000000', 'https://example.com/timeout');
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can subscribe to single invoice', function () {
@@ -67,7 +68,7 @@ it('can subscribe to single invoice', function () {
         ],
     ]);
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can subscribe to bulk invoice', function () {
@@ -123,7 +124,7 @@ it('can subscribe to bulk invoice', function () {
         ],
     ]);
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can reconcile invoice', function () {
@@ -138,7 +139,7 @@ it('can reconcile invoice', function () {
 
     $response = Mpesa::billManagerReconciliation('LXXXXX', 1, '254700000000', '2024-08-01', 'test');
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can cancel single invoice', function () {
@@ -155,7 +156,7 @@ it('can cancel single invoice', function () {
         'externalReference' => '#9932340',
     ]);
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can cancel bulk invoice', function () {
@@ -177,5 +178,5 @@ it('can cancel bulk invoice', function () {
         ],
     ]);
 
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });

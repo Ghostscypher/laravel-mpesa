@@ -10,7 +10,7 @@ class AllowOnlyWhitelistedIps
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Closure(Request): (Response)  $next
      * @param  mixed  $roles
      */
     public function handle(Request $request, \Closure $next, ?bool $fuzzy_match = null): Response

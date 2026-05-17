@@ -3,6 +3,7 @@
 namespace Ghostscypher\Mpesa\Concerns;
 
 use Ghostscypher\Mpesa\Exceptions\MpesaValidationException;
+use Illuminate\Http\Client\Response;
 
 trait MpesaQRCode
 {
@@ -30,7 +31,7 @@ trait MpesaQRCode
         ?string $CPI = null,
         string $trx_code = 'PB',
         int $size = 300
-    ): \Illuminate\Http\Client\Response {
+    ): Response {
         // Generate token
         $this->generateToken();
 

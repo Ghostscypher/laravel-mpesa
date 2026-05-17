@@ -3,7 +3,9 @@
 namespace Ghostscypher\Mpesa\Concerns;
 
 use Illuminate\Contracts\Validation\Factory;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
@@ -111,7 +113,7 @@ trait MpesaGlobalConfig
     /**
      * Create a new Validator instance.
      *
-     * @return ($data is null ? \Illuminate\Contracts\Validation\Factory : \Illuminate\Contracts\Validation\Validator)
+     * @return ($data is null ? Factory : Validator)
      */
     protected static function validate(?array $data = null, array $rules = [], array $messages = [], array $attributes = [])
     {
@@ -188,7 +190,7 @@ trait MpesaGlobalConfig
      * @param  mixed  $value_key  The key to use as the value in the key-value pair
      * @param  mixed  $case_insensitive  Whether to make the key case insensitive
      */
-    public static function deconstructData($data, $key_name = 'Name', $value_key = 'Value', $case_insensitive = false): \Illuminate\Support\Collection
+    public static function deconstructData($data, $key_name = 'Name', $value_key = 'Value', $case_insensitive = false): Collection
     {
         $deconstructed = [];
 

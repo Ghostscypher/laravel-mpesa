@@ -3,6 +3,7 @@
 // Test authorization
 
 use Ghostscypher\Mpesa\Facades\Mpesa;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 it('can send generate QR code', function () {
@@ -18,5 +19,5 @@ it('can send generate QR code', function () {
     $response = Mpesa::generateQRCode('Algoskech Solutions', 'test QR code', 1, '4072835', 'PB', 300);
 
     // Expect no exception
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });

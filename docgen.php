@@ -1,11 +1,13 @@
 <?php
 
+use Ghostscypher\Mpesa\Mpesa;
+
 return [
-    'facade' => \Ghostscypher\Mpesa\Facades\Mpesa::class,
+    'facade' => Ghostscypher\Mpesa\Facades\Mpesa::class,
 
     // Optional
     'classes' => [
-        \Ghostscypher\Mpesa\Mpesa::class,
+        Mpesa::class,
     ],
 
     // Global Excluded Methods

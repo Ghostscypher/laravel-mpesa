@@ -2,6 +2,7 @@
 
 // Test authorization
 
+use Ghostscypher\Mpesa\Exceptions\MpesaAuthException;
 use Ghostscypher\Mpesa\Facades\Mpesa;
 use Illuminate\Support\Facades\Http;
 
@@ -39,7 +40,7 @@ it('can throw auth exception when client key or client secret is not supplied', 
 
     expect(function () {
         Mpesa::generateToken(true);
-    })->toThrow(\Ghostscypher\Mpesa\Exceptions\MpesaAuthException::class);
+    })->toThrow(MpesaAuthException::class);
 });
 
 it('can generate security credentials', function () {
