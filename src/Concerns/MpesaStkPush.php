@@ -3,6 +3,7 @@
 namespace Ghostscypher\Mpesa\Concerns;
 
 use Ghostscypher\Mpesa\Exceptions\MpesaValidationException;
+use Illuminate\Http\Client\Response;
 
 /**
  * MpesaStkPush Mpesa express (STK Push) API
@@ -40,7 +41,7 @@ trait MpesaStkPush
      * @param  string  $business_short_code  The business shortcode to use for the transaction, if null we will use the default shortcode
      * @param  string  $party_a  The user phone number, if null we will use the phone number provided
      *
-     * @throws \Ghostscypher\Mpesa\Exceptions\MpesaValidationException If the validation fails
+     * @throws MpesaValidationException If the validation fails
      */
     public function stkPush(
         string $phone_number,
@@ -52,7 +53,7 @@ trait MpesaStkPush
         ?string $shortcode = null,
         ?string $business_short_code = null,
         ?string $party_a = null
-    ): \Illuminate\Http\Client\Response {
+    ): Response {
         // Generate the token
         $this->generateToken();
 
@@ -99,9 +100,9 @@ trait MpesaStkPush
      * @param  string  $checkout_request_id  The checkout request ID from the STK push
      * @param  string  $shortcode  The shortcode to use for the transaction, if null we will use the default shortcode
      *
-     * @throws \Ghostscypher\Mpesa\Exceptions\MpesaValidationException If the validation fails
+     * @throws MpesaValidationException If the validation fails
      */
-    public function stkPushQuery($checkout_request_id, ?string $shortcode = null): \Illuminate\Http\Client\Response
+    public function stkPushQuery($checkout_request_id, ?string $shortcode = null): Response
     {
         // Generate the token
         $this->generateToken();

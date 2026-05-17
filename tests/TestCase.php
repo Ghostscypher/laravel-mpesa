@@ -2,6 +2,7 @@
 
 namespace Ghostscypher\Mpesa\Tests;
 
+use Dotenv\Dotenv;
 use Ghostscypher\Mpesa\MpesaServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Http;
@@ -72,7 +73,7 @@ class TestCase extends BaseTestCase
     {
         // Load .env file
         $original_env = $_ENV;
-        \Dotenv\Dotenv::createImmutable(__DIR__.'/../', '.env.example')->safeLoad();
+        Dotenv::createImmutable(__DIR__.'/../', '.env.example')->safeLoad();
         $GLOBALS['_ENV'] = array_merge($_ENV, $original_env);
 
         $this->loadConfig($app);

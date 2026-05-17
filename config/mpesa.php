@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\LaravelMpesa\MpesaController;
+use Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps;
+use Ghostscypher\Mpesa\Listeners\LogRequestSending;
+use Ghostscypher\Mpesa\Listeners\LogResponseReceived;
+use Ghostscypher\Mpesa\Models\MpesaCallback;
+use Ghostscypher\Mpesa\Models\MpesaLog;
+use Ghostscypher\Mpesa\Models\MpesaToken;
+
 return [
 
     // Definition of terms
@@ -303,9 +311,9 @@ return [
     |
     */
     'models' => [
-        'token' => \Ghostscypher\Mpesa\Models\MpesaToken::class, // The model for the mpesa tokens, most of the time you won't need to change this
-        'log' => \Ghostscypher\Mpesa\Models\MpesaLog::class, // The model for the logs, HTTP requests and responses,
-        'callback_log' => \Ghostscypher\Mpesa\Models\MpesaCallback::class, // The model for the mpesa callbacks,
+        'token' => MpesaToken::class, // The model for the mpesa tokens, most of the time you won't need to change this
+        'log' => MpesaLog::class, // The model for the logs, HTTP requests and responses,
+        'callback_log' => MpesaCallback::class, // The model for the mpesa callbacks,
     ],
 
     /*
@@ -358,8 +366,8 @@ return [
     |
     */
     'listeners' => [
-        'log_request' => \Ghostscypher\Mpesa\Listeners\LogRequestSending::class, // The listener for logging the request sending
-        'log_response' => \Ghostscypher\Mpesa\Listeners\LogResponseReceived::class, // The listener for logging the response received
+        'log_request' => LogRequestSending::class, // The listener for logging the request sending
+        'log_response' => LogResponseReceived::class, // The listener for logging the response received
     ],
 
     /*
@@ -371,7 +379,7 @@ return [
     | change this to your own controller if you want to customize the callbacks.
     |
     */
-    'controller' => \App\Http\Controllers\LaravelMpesa\MpesaController::class,
+    'controller' => MpesaController::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -388,7 +396,7 @@ return [
     */
     'middlewares' => [
         // This middleware will allow only whitelisted IPs to access the mpesa callback routes
-        \Ghostscypher\Mpesa\Http\Middleware\AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
+        AllowOnlyWhitelistedIps::class, // Uncomment this to enable the middleware
     ],
 
     /*

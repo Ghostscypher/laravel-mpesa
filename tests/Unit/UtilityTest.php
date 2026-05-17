@@ -3,6 +3,7 @@
 // Test authorization
 
 use Ghostscypher\Mpesa\Facades\Mpesa;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 it('can send raw request', function () {
@@ -18,7 +19,7 @@ it('can send raw request', function () {
     $response = Mpesa::rawRequest('GET', 'https://sandbox.safaricom.co.ke/', [], [], false);
 
     // Expect no exception
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can send account balance request', function () {
@@ -34,7 +35,7 @@ it('can send account balance request', function () {
     $response = Mpesa::checkBalance('https://example.com/result', 'https://example.com/timeout');
 
     // Expect no exception
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can send reversal request', function () {
@@ -50,7 +51,7 @@ it('can send reversal request', function () {
     $response = Mpesa::reverseTransaction('OEI2AK4Q16', '1', 'https://example.com/result', 'https://example.com/timeout', '11', '600992');
 
     // Expect no exception
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
 
 it('can send transaction status request', function () {
@@ -66,5 +67,5 @@ it('can send transaction status request', function () {
     $response = Mpesa::transactionStatus('OEI2AK4Q16', '4', 'https://example.com/result', 'https://example.com/timeout', '600992');
 
     // Expect no exception
-    expect($response)->toBeInstanceOf(\Illuminate\Http\Client\Response::class);
+    expect($response)->toBeInstanceOf(Response::class);
 });
