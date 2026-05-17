@@ -121,7 +121,7 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-        if: (matrix.laravel == '9.*' || matrix.laravel == '10.*' || matrix.laravel == '11.*') && matrix.php != ''
+        if: (matrix.laravel == '9.*' || matrix.laravel == '10.*' || matrix.laravel == '11.*' || matrix.laravel == '12.*' || matrix.laravel == '13.*') && matrix.php != ''
 
       - name: Install Laravel 7/8 dependencies
         run: |
